@@ -11,12 +11,12 @@ export class CrudService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  retrieveAllEmployees(): Observable<any> {
-    return this.http.get(`http://localhost:9090/admin/getAllEmployeesWithDepartments`);
+  retrieveAllEmployees(page): Observable<any> {
+    return this.http.get(`http://localhost:9090/admin/getAllEmployeesWithDepartments/${page}`);
   }
 
-  retrieveAllEmployeesWithSort(sortProperty, sortOrder, phrase): Observable<any> {
-    return this.http.get(`http://localhost:9090/admin/getAllEmployeesWithDepartments/sortBy/${sortProperty}/${sortOrder}/${phrase}`);
+  retrieveAllEmployeesWithSort(sortProperty, sortOrder, phrase, page): Observable<any> {
+    return this.http.get(`http://localhost:9090/admin/getAllEmployeesWithDepartments/sortBy/${sortProperty}/${sortOrder}/${phrase}/${page}`);
   }
 
 
@@ -61,6 +61,10 @@ export class CrudService {
     return this.http.get(`http://localhost:9090/test`, {responseType: 'text'});
   }
 
+  countPages(): Observable<any> {
+    return this.http.get(`http://localhost:9090/countPages` , {responseType: 'text'});
+  }
+
   testAuth(): any {
     let temp = '';
     this.auth().subscribe(
@@ -85,8 +89,8 @@ export class CrudService {
     return this.http.get(`http://localhost:9090/user/getMyDepts`);
   }
 
-  search(phrase): Observable<any> {
-    return this.http.get(`http://localhost:9090/admin/search/${phrase}`);
+  search(phrase, page): Observable<any> {
+    return this.http.get(`http://localhost:9090/admin/search/${phrase}/${page}`);
   }
 
 }
