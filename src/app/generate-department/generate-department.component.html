@@ -1,0 +1,26 @@
+
+<div class="heading"><p>ADD DEPARTMENT</p></div>
+<p *ngIf="createdMessageDepartment" class="err succ">{{createdMessageDepartment}}</p>
+<form (ngSubmit)="saveDep()">
+
+  <div class="input validate">
+    <br>
+    <br>
+
+    <input type="text" [(ngModel)]="dep.departmentName" placeholder="demartment name" name="departmentName"
+           required="required"><a>{{invDepName}}</a>
+
+    <br>
+
+    <input type="text" [(ngModel)]="dep.bugdet" name="budget" placeholder="budget" required="required"><a>{{invBudget}}</a>
+
+    <br>
+
+    <input type="text" [(ngModel)]="dep.departmentManager" name="departmentManager" placeholder="department manager"
+           required="required"><a>{{invDepartManager}}</a>
+
+    <br><br><br>
+  </div>
+  <button type="submit" class="button_edit button_save">Save department</button>
+
+</form>

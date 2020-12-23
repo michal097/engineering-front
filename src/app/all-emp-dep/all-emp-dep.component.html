@@ -1,0 +1,42 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="heading"><p> ALL EMPLOYEES WITH DEPARTMENTS</p></div>
+<br>
+<p *ngIf="deleteInform" class="err succ">{{deleteInform}}</p>
+<br>
+
+<div class="search">
+<input [(ngModel)]="phrase" type="text" placeholder="search by: name, last name or department " name="search">
+<button (click)="makeSearch(phrase)"> <i class="fa fa-search"></i></button>
+</div>
+
+<table class="table">
+
+  <thead>
+  <tr>
+    <th (click)="sortEmps(sortEmployeeName, sortOrder)">Name </th>
+    <th (click)="sortEmps(sortEmployeeLName, sortOrder)">Last name</th>
+    <th (click)="sortEmps(sortDepartmentName, sortOrder)">Department</th>
+    <th (click)="sortEmps(sortDepartmentBug, sortOrder)">Dept budget</th>
+    <th (click)="sortEmps(sortDepartmentManager, sortOrder)">Manager</th>
+    <th>ACTIONS</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let e of employees">
+    <td>{{e.employee.name}}</td>
+    <td>{{e.employee.lastName}}</td>
+    <td>{{e.department.departmentName}}</td>
+    <td>{{e.department.bugdet}}</td>
+    <td>{{e.department.departmentManager}}</td>
+
+    <td>
+      <button class="button_edit button_details" (click)="retrieveDetailsOfOneUser(e.empDeptId)"> Details </button>
+      <button class="button_edit" (click)="updateEmployee(e.employee.employeeId)"> Update </button>
+      <button class="button_edit button_delete" (click)="deleteEmpDep(e.empDeptId)" > Delete </button>
+    </td>
+  </tr>
+  </tbody>
+</table>

@@ -1,0 +1,38 @@
+<div class="heading"><p> ADD EMPLOYEE</p></div>
+
+<form (ngSubmit)="save()" >
+
+  <p *ngIf="createdMessage" class="err succ">{{createdMessage}}</p>
+
+  <br>
+  <div class="input validate">
+
+    <input type="text" [(ngModel)]="emp.username" name="username" placeholder="username" required="required"> <a>  {{invUsername}} </a>
+
+    <br>
+
+    <input type="text" [(ngModel)]="emp.name" name="name" placeholder="name" required="required"><a>  {{invName}} </a>
+
+  <br>
+
+    <input type="text" [(ngModel)]="emp.lastName" name="lastName" placeholder="last name" required="required"><a>  {{invLastName}} </a>
+
+  <br>
+
+    <input type="text" [(ngModel)]="emp.age" name="age" placeholder="age" required="required"><a>  {{invAge}} </a>
+
+  <br>
+
+    <input type="text" [(ngModel)]="emp.salary" name="salary" placeholder="salary" required="required"><a>  {{invSalary}} </a>
+
+  <br>
+  <a style="color: black; margin-left: 10px">select department </a><br>
+  <select [(ngModel)]="emp.department" name="department" required> // value is a string or number
+    <option value="" disabled selected >Select department</option>
+    <option *ngFor="let obj of depNames" [value]="obj">{{obj}}</option>
+</select>
+  </div>
+  <br><br><br><br><br>
+
+  <button type="submit" class="button_edit button_save">Save</button>
+</form>

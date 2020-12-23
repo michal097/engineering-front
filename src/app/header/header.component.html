@@ -1,0 +1,18 @@
+<header class="image_header">
+<span><a routerLink="/" >Home</a></span>
+
+<a *ngIf="!loginService.isUserLoggedIn() " routerLink="/login" >Login</a>
+<a *ngIf="!loginService.isUserLoggedIn() " routerLink="/register" >Register</a>
+<a *ngIf="isAuth && loginService.isUserLoggedIn()" routerLink="/getUserRoleData" >Employees in my dept</a>
+<a *ngIf="isAuth && loginService.isUserLoggedIn()" routerLink="/getMyDepts" >Show my departments</a>
+<a *ngIf="!isAuth && loginService.isUserLoggedIn()" routerLink="/addEmployee" >Add employee</a>
+<a *ngIf="!isAuth && loginService.isUserLoggedIn()" routerLink="/addDepartment" >Add department</a>
+<a *ngIf="!isAuth && loginService.isUserLoggedIn()" routerLink="/all" >All</a>
+<a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" style="float: right; ">LogOut</a>
+</header>
+
+
+
+<footer class="footer">
+  <p>Kot w masce corp.</p>
+</footer>

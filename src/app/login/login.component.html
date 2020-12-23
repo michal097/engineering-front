@@ -1,0 +1,22 @@
+<div class="heading"><p>Login</p></div>
+       <p class="err" *ngIf="error">  {{ error }} </p>
+<form>
+
+  <div class="input">
+    <p>
+      <input placeholder="Username" [(ngModel)]="username" name="username" required>
+    </p>
+    <p>
+      <input placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+    </p>
+
+
+
+  </div>
+  <button class="button_edit button_save" (click)="checkLogin()" id="log">Login</button>
+
+</form>
+
+
+
+

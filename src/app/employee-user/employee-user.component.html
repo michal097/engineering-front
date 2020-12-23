@@ -1,0 +1,25 @@
+<table class="table">
+
+  <thead>
+  <tr>
+    <th scope="col" [appSort]="employee" data-order="desc" data-name="employeeId">ID</th>
+    <th scope="col" [appSort]="employee" data-order="desc" data-name="name">Name</th>
+    <th scope="col" [appSort]="employee" data-order="desc" data-name="lastName">Last name</th>
+    <th scope="col" [appSort]="employee" data-order="desc" data-name="age">Age</th>
+    <th scope="col" [appSort]="employee" data-order="desc" data-name="eployedDate">Employeed date</th>
+
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let e of employee">
+    <td>{{e.employeeId}}</td>
+    <td>{{e.name}}</td>
+    <td>{{e.lastName}}</td>
+    <td>{{e.age}}</td>
+    <td>{{e.eployedDate}}</td>
+
+
+  </tr>
+  </tbody>
+</table>

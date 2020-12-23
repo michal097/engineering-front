@@ -1,0 +1,21 @@
+
+<table class="table">
+
+  <thead>
+  <tr>
+    <th scope="col" [appSort]="department" data-order="desc" data-name="departmentName">Name</th>
+    <th scope="col" [appSort]="department" data-order="desc" data-name="departmentManager">Department Manager</th>
+    <th scope="col" [appSort]="department" data-order="desc" data-name="bugdet">Budget</th>
+
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let d of department">
+    <td>{{d.departmentName}}</td>
+    <td>{{d.departmentManager}}</td>
+    <td>{{d.bugdet}}</td>
+
+  </tr>
+  </tbody>
+</table>
