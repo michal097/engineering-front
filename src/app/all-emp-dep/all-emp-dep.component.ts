@@ -104,12 +104,16 @@ export class AllEmpDepComponent implements OnInit {
   }
 
   countAllRecords(): void {
+    if (this.phrase === '') {
+      this.phrase = '_';
+    }
     this.service.countPages(this.phrase).subscribe(data => {
       this.countPages = Number(data);
       this.displayCountPage = Math.ceil(Number(data) / 5);
       if (this.countPages === 0) {
         this.displayCountPage = Number(data) + 1;
       }
+      this.phrase = '';
     });
 
   }
