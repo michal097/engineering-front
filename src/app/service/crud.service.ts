@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from "rxjs";
-import {Router} from "@angular/router";
+import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +16,8 @@ export class CrudService {
   }
 
   retrieveAllEmployeesWithSort(sortProperty, sortOrder, phrase, page): Observable<any> {
-    return this.http.get(`http://localhost:9090/admin/getAllEmployeesWithDepartments/sortBy/${sortProperty}/${sortOrder}/${phrase}/${page}`);
+   return this.http.get(`http://localhost:9090/admin/getAllEmployeesWithDepartments/sortBy/${sortProperty}/${sortOrder}/${phrase}/${page}`);
   }
-
 
   createEmp(empl): Observable<any> {
     return this.http.post(`http://localhost:9090/admin/saveEmp`, empl);
@@ -61,8 +60,8 @@ export class CrudService {
     return this.http.get(`http://localhost:9090/test`, {responseType: 'text'});
   }
 
-  countPages(): Observable<any> {
-    return this.http.get(`http://localhost:9090/countPages` , {responseType: 'text'});
+  countPages(phrase): Observable<any> {
+    return this.http.get(`http://localhost:9090/countPages/${phrase}`, {responseType: 'text'});
   }
 
   testAuth(): any {

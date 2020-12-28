@@ -8,9 +8,10 @@
 
 <div class="search">
 <input [(ngModel)]="phrase" type="text" placeholder="search by: name, last name or department " name="search">
-<button (click)="makeSearch(phrase)"> <i class="fa fa-search"></i></button>
+<button (click)="makeSearch(phrase); makePageZero()"> <i class="fa fa-search"></i></button>
 </div>
-
+<button [value]="page" (click)="decrement()"> < </button>
+<button [value]="page" (click)="increment()"> > </button>
 <table class="table">
 
   <thead>
@@ -39,8 +40,7 @@
     </td>
   </tr>
   </tbody>
-  <button [value]="page" (click)="decrement()"> < </button>
-  <button [value]="page" (click)="increment()"> > </button>
+
 </table>
 
 

@@ -48,7 +48,6 @@ export class AllEmpDepComponent implements OnInit {
     this.service.retrieveAllEmployees(this.page).subscribe(
       response => {
         this.employees = response;
-        console.log(response);
       }
     );
   }
@@ -88,28 +87,30 @@ export class AllEmpDepComponent implements OnInit {
     this.service.search(phrase, this.page).subscribe(
       data => this.employees = data
     );
+    this.countAllRecords();
     this.phraseForSort = this.phrase;
-    this.phrase = undefined;
+
+  }
+
+  makePageZero(): void {
+    this.page = 0;
   }
 
   countAllRecords(): void {
-    this.service.countPages().subscribe(data => this.countPages = Number(data));
+    this.service.countPages(this.phrase).subscribe(data => this.countPages = Number(data));
   }
 
   increment(): void {
     if (this.countPages - (5 * (this.page + 1)) > 0) {
-      console.log('rekordy: ' + this.countPages);
-      console.log('strona' + this.page);
       this.page++;
-      this.getEmps();
+      this.makeSearch(this.phrase);
     }
-    console.log(this.page);
   }
 
   decrement(): void {
     if (this.page > 0) {
       this.page--;
-      this.getEmps();
+      this.makeSearch(this.phrase);
     }
   }
 }
