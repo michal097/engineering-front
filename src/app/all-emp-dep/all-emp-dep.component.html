@@ -46,4 +46,13 @@
 <div class="pagination_container">
   <button class="pagination" [value]="page" (click)="decrement()"> < </button> <a >{{page+1}} / {{displayCountPage}}</a>
   <button class="pagination" [value]="page" (click)="increment()"> > </button>
+
+
+    <label for="select"> Items per page
+    <select id="select"[(ngModel)]="records" (change)="changeRecords(records); getEmps(); countAllRecords()">
+      <option  [value]="5" selected>5</option>
+      <option  [value]="10">10</option>
+      <option  [value]="15">15</option>
+    </select>
+    </label>
 </div>

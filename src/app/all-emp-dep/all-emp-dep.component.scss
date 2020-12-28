@@ -45,8 +45,15 @@
   margin-left: 45%;
   margin-right: 45%;
   margin-top: -10%;
+  white-space: nowrap;
 }
 
+.pagination_container label{
+  margin-left: 250%;
+}
+.choose_items_per_page{
+  margin-left: 100%;
+}
 .pagination_container .pagination {
   font-size: 40px;
   background: #2196F3;
@@ -63,6 +70,7 @@
 .pagination_container a {
   font-size: 30px;
   margin: 20px;
+
 }
 
 .search_valid {

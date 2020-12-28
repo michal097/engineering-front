@@ -11,12 +11,12 @@ export class CrudService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  retrieveAllEmployees(page): Observable<any> {
-    return this.http.get(`http://localhost:9090/admin/getAllEmployeesWithDepartments/${page}`);
+  retrieveAllEmployees(page, records): Observable<any> {
+    return this.http.get(`http://localhost:9090/admin/getAllEmployeesWithDepartments/${page}/${records}`);
   }
 
-  retrieveAllEmployeesWithSort(sortProperty, sortOrder, phrase, page): Observable<any> {
-   return this.http.get(`http://localhost:9090/admin/getAllEmployeesWithDepartments/sortBy/${sortProperty}/${sortOrder}/${phrase}/${page}`);
+  retrieveAllEmployeesWithSort(sortProperty, sortOrder, phrase, page, records): Observable<any> {
+    return this.http.get(`http://localhost:9090/admin/getAllEmployeesWithDepartments/sortBy/${sortProperty}/${sortOrder}/${phrase}/${page}/${records}`);
   }
 
   createEmp(empl): Observable<any> {
@@ -88,8 +88,8 @@ export class CrudService {
     return this.http.get(`http://localhost:9090/user/getMyDepts`);
   }
 
-  search(phrase, page): Observable<any> {
-    return this.http.get(`http://localhost:9090/admin/search/${phrase}/${page}`);
+  search(phrase, page, records): Observable<any> {
+    return this.http.get(`http://localhost:9090/admin/search/${phrase}/${page}/${records}`);
   }
 
 }

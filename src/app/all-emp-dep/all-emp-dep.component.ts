@@ -27,7 +27,8 @@ export class AllEmpDepComponent implements OnInit {
   sortDepartmentBug = 'departmentbudget';
   sortDepartmentManager = 'departmentmanager';
   searchValidation = '';
-
+  // records property
+  records = 5;
 
   constructor(private router: Router,
               private service: CrudService) {
@@ -40,6 +41,10 @@ export class AllEmpDepComponent implements OnInit {
     this.getUsername();
   }
 
+  changeRecords(records): void {
+    this.records = records;
+  }
+
   getUsername(): void {
     this.service.authUsername().subscribe(
       responde => console.log(responde)
@@ -47,7 +52,7 @@ export class AllEmpDepComponent implements OnInit {
   }
 
   getEmps(): void {
-    this.service.retrieveAllEmployees(this.page).subscribe(
+    this.service.retrieveAllEmployees(this.page, this.records).subscribe(
       response => {
         this.employees = response;
       }
@@ -55,7 +60,7 @@ export class AllEmpDepComponent implements OnInit {
   }
 
   sortEmps(sort, sortOrder): void {
-    this.service.retrieveAllEmployeesWithSort(sort, sortOrder, this.phraseForSort, this.page).subscribe(
+    this.service.retrieveAllEmployeesWithSort(sort, sortOrder, this.phraseForSort, this.page, this.records).subscribe(
       data => {
         this.employees = data;
       });
@@ -92,7 +97,7 @@ export class AllEmpDepComponent implements OnInit {
     } else {
       this.searchValidation = '';
     }
-    this.service.search(phrase, this.page).subscribe(
+    this.service.search(phrase, this.page, this.records).subscribe(
       data => this.employees = data
     );
     this.countAllRecords();
@@ -109,7 +114,7 @@ export class AllEmpDepComponent implements OnInit {
     }
     this.service.countPages(this.phrase).subscribe(data => {
       this.countPages = Number(data);
-      this.displayCountPage = Math.ceil(Number(data) / 5);
+      this.displayCountPage = Math.ceil(Number(data) / this.records);
       if (this.countPages === 0) {
         this.displayCountPage = Number(data) + 1;
       }
@@ -119,7 +124,7 @@ export class AllEmpDepComponent implements OnInit {
   }
 
   increment(): void {
-    if (this.countPages - (5 * (this.page + 1)) > 0) {
+    if (this.countPages - (this.records * (this.page + 1)) > 0) {
       this.page++;
       this.makeSearch(this.phrase);
       this.searchValidation = '';
