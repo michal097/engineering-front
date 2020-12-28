@@ -9,9 +9,9 @@
 <div class="search">
 <input [(ngModel)]="phrase" type="text" placeholder="search by: name, last name or department " name="search">
 <button (click)="makeSearch(phrase); makePageZero()"> <i class="fa fa-search"></i></button>
+  <p class="search_valid">{{searchValidation}}</p>
 </div>
-<button [value]="page" (click)="decrement()"> < </button>
-<button [value]="page" (click)="increment()"> > </button>
+
 <table class="table">
 
   <thead>
@@ -43,4 +43,7 @@
 
 </table>
 
-
+<div class="pagination_container">
+  <button class="pagination" [value]="page" (click)="decrement()"> < </button> <a >{{page+1}} / {{displayCountPage}}</a>
+  <button class="pagination" [value]="page" (click)="increment()"> > </button>
+</div>

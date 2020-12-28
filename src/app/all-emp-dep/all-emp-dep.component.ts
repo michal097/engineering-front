@@ -19,13 +19,15 @@ export class AllEmpDepComponent implements OnInit {
   phraseForSort = undefined;
   page = 0;
   countPages = 0;
-
+  displayCountPage = 0;
   // sort properties
   sortEmployeeName = 'employeename';
   sortEmployeeLName = 'employeelastName';
   sortDepartmentName = 'departmentname';
   sortDepartmentBug = 'departmentbudget';
   sortDepartmentManager = 'departmentmanager';
+  searchValidation = '';
+
 
   constructor(private router: Router,
               private service: CrudService) {
@@ -84,12 +86,17 @@ export class AllEmpDepComponent implements OnInit {
   }
 
   makeSearch(phrase): void {
+    if (phrase === '' || phrase === undefined) {
+      phrase = undefined;
+      this.searchValidation = 'Enter some text';
+    } else {
+      this.searchValidation = '';
+    }
     this.service.search(phrase, this.page).subscribe(
       data => this.employees = data
     );
     this.countAllRecords();
     this.phraseForSort = this.phrase;
-
   }
 
   makePageZero(): void {
@@ -97,13 +104,21 @@ export class AllEmpDepComponent implements OnInit {
   }
 
   countAllRecords(): void {
-    this.service.countPages(this.phrase).subscribe(data => this.countPages = Number(data));
+    this.service.countPages(this.phrase).subscribe(data => {
+      this.countPages = Number(data);
+      this.displayCountPage = Math.ceil(Number(data) / 5);
+      if (this.countPages === 0) {
+        this.displayCountPage = Number(data) + 1;
+      }
+    });
+
   }
 
   increment(): void {
     if (this.countPages - (5 * (this.page + 1)) > 0) {
       this.page++;
       this.makeSearch(this.phrase);
+      this.searchValidation = '';
     }
   }
 
@@ -111,6 +126,7 @@ export class AllEmpDepComponent implements OnInit {
     if (this.page > 0) {
       this.page--;
       this.makeSearch(this.phrase);
+      this.searchValidation = '';
     }
   }
 }
