@@ -16,22 +16,26 @@ export class AuthenticationService {
   }
 
   isUser: string;
-  isUserAuth: boolean;
 
-// Provide username and password for authentication, and once authentication is successful,
-// store JWT token in session
   authenticate(username, password) {
     return this.httpClient
       .post<any>('http://localhost:9090/authenticate', {username, password})
       .pipe(
         map(userData => {
           sessionStorage.setItem('username', username);
-          this.service.auth().subscribe(data => this.isUser = data);
+          this.service.auth().subscribe(data => {
+            this.isUser = data;
+            sessionStorage.setItem('auth', data);
+          });
           const tokenStr = 'Bearer ' + userData.token;
           sessionStorage.setItem('token', tokenStr);
           return userData;
         })
       );
+  }
+
+  refreshAuth(): void {
+    this.service.auth().subscribe(data => sessionStorage.setItem('auth', data));
   }
 
   isUserLoggedIn() {
@@ -42,6 +46,10 @@ export class AuthenticationService {
 
   logOut() {
     sessionStorage.removeItem('username');
+    sessionStorage.removeItem('auth');
   }
 
+  isAdminAuthenticated(): any {
+    return sessionStorage.getItem('auth') === '[ROLE_ADMIN]' && this.isUserLoggedIn();
+  }
 }

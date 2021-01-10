@@ -22,7 +22,6 @@ export class EmpDeptDetailsComponent implements OnInit {
   ngOnInit() {
     this.employeeId = this.router.snapshot.params.id;
     this.retrieveDetailsOfOneUser(this.employeeId);
-    this.service.testAuth();
   }
 
   retrieveDetailsOfOneUser(id): void {

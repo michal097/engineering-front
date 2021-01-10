@@ -39,7 +39,7 @@ export class GenerateEmployeeComponent implements OnInit {
   ngOnInit() {
     this.emp = new Employee(null, null, null, null, null, null, null, null);
     this.getDepNames();
-    this.service.testAuth();
+
   }
 
   saveEmp(): void {

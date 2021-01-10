@@ -23,17 +23,17 @@ export class LoginComponent implements OnInit {
   }
 
   checkLogin() {
-    (this.loginservice.authenticate(this.username, this.password).subscribe(
-        data => {
-          this.router.navigate(['']);
-          this.invalidLogin = false;
-        },
-        error => {
-          this.invalidLogin = true;
-          this.error = 'invalid username or password';
+    this.loginservice.authenticate(this.username, this.password).subscribe(
+      () => {
+        this.router.navigate(['']);
+        this.loginservice.refreshAuth();
+        this.invalidLogin = false;
+      },
+      () => {
+        this.invalidLogin = true;
+        this.error = 'invalid username or password';
 
-        }
-      )
+      }
     );
   }
 }

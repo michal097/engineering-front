@@ -35,7 +35,6 @@ export class AllEmpDepComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.testAuth();
     this.getEmps();
     this.countAllRecords();
     this.getUsername();
@@ -43,6 +42,7 @@ export class AllEmpDepComponent implements OnInit {
 
   changeRecords(records): void {
     this.records = records;
+    this.page = 0;
   }
 
   getUsername(): void {
@@ -110,7 +110,8 @@ export class AllEmpDepComponent implements OnInit {
 
   countAllRecords(): void {
     if (this.phrase === '') {
-      this.phrase = '_';
+      // in case search box was filled and phrase was deleted
+      this.phrase = undefined;
     }
     this.service.countPages(this.phrase).subscribe(data => {
       this.countPages = Number(data);
@@ -118,7 +119,9 @@ export class AllEmpDepComponent implements OnInit {
       if (this.countPages === 0) {
         this.displayCountPage = Number(data) + 1;
       }
-      this.phrase = '';
+      //  nie paginuje poprawnie po wynikach wyszukiwania
+      //  bez wymazywania frazy wyszukiwania działa OK!!!
+      //  this.phrase = '';
     });
 
   }

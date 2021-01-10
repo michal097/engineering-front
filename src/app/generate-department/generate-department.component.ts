@@ -28,7 +28,6 @@ export class GenerateDepartmentComponent implements OnInit {
 
   ngOnInit() {
     this.dep = new Department(null, null, null);
-    this.service.testAuth();
   }
 
   saveDep(): void {

@@ -1,14 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CrudService {
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient) {
   }
 
   retrieveAllEmployees(page, records): Observable<any> {
@@ -16,7 +15,8 @@ export class CrudService {
   }
 
   retrieveAllEmployeesWithSort(sortProperty, sortOrder, phrase, page, records): Observable<any> {
-    return this.http.get(`http://localhost:9090/admin/getAllEmployeesWithDepartments/sortBy/${sortProperty}/${sortOrder}/${phrase}/${page}/${records}`);
+    return this.http
+      .get(`http://localhost:9090/admin/getAllEmployeesWithDepartments/sortBy/${sortProperty}/${sortOrder}/${phrase}/${page}/${records}`);
   }
 
   createEmp(empl): Observable<any> {
@@ -62,18 +62,6 @@ export class CrudService {
 
   countPages(phrase): Observable<any> {
     return this.http.get(`http://localhost:9090/countPages/${phrase}`, {responseType: 'text'});
-  }
-
-  testAuth(): any {
-    let temp = '';
-    this.auth().subscribe(
-      data => {
-        temp = data;
-        if (!temp.includes('ADMIN')) {
-          this.router.navigate(['login']);
-        }
-      }
-    );
   }
 
   authUsername(): Observable<any> {

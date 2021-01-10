@@ -15,26 +15,39 @@ import {HomeComponent} from './home/home.component';
 import {EmployeeDeptComponent} from './employee-dept/employee-dept.component';
 import {ErrorComponent} from './error/error.component';
 import {EmpDeptDetailsComponent} from './emp-dept-details/emp-dept-details.component';
+import {AdminAuthService} from './service/admin-auth.service';
+import {UserAuthService} from './service/user-auth.service';
+
 
 const routes: Routes = [
+  // for all
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'addEmployee', component: GenerateEmployeeComponent},
-  {path: 'addDepartment', component: GenerateDepartmentComponent},
-  {path: 'updateEmpl/:id', component: UpdateEmployeeComponent},
   {path: 'register', component: RegisterUserComponent},
-  {path: 'all', component: AllEmpDepComponent},
-  {path: 'getUserRoleData', component: EmployeeUserComponent},
-  {path: 'getMyDepts', component: EmployeeDeptComponent},
+
+  // for admin
+  {path: 'addEmployee', component: GenerateEmployeeComponent, canActivate: [AdminAuthService]},
+  {path: 'addDepartment', component: GenerateDepartmentComponent, canActivate: [AdminAuthService]},
+  {path: 'updateEmpl/:id', component: UpdateEmployeeComponent, canActivate: [AdminAuthService]},
+  {path: 'employeeRelations/:id', component: EmpDeptDetailsComponent, canActivate: [AdminAuthService]},
+  {path: 'all', component: AllEmpDepComponent, canActivate: [AdminAuthService]},
+
+  //  for users
+  {path: 'getUserRoleData', component: EmployeeUserComponent, canActivate: [UserAuthService]},
+  {path: 'getMyDepts', component: EmployeeDeptComponent, canActivate: [UserAuthService]},
+
+  // for authenticated
   {path: 'logout', component: LogoutComponent, canActivate: [AuthGaurdService]},
-  {path: 'employeeRelations/:id', component: EmpDeptDetailsComponent},
+
   {path: '**', component: ErrorComponent}
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)], // , { useHash: true }
+  exports: [RouterModule],
+  providers: [AdminAuthService, UserAuthService]// , {provide: LocationStrategy, useClass: PathLocationStrategy}]
 })
 export class AppRoutingModule {
+
 }
