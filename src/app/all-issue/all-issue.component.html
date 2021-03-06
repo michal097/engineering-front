@@ -1,0 +1,23 @@
+<br><br><br>
+<mat-card style="margin-right: 10%; margin-left: 10%">
+    <h1>All issues</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Status</th>
+      <th scope="col">Reporter</th>
+      <th scope="col">Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let i of issue">
+      <td> {{ i.issueTitle }}</td>
+      <td>{{ i.status}}</td>
+      <td>{{ i.reporter}}</td>
+      <td ><button mat-raised-button color="primary" (click)="redirectToIssue(i.issueId)" >Details</button></td>
+    </tr>
+    </tbody>
+  </table>
+
+</mat-card>

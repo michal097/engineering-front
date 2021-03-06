@@ -1,0 +1,43 @@
+<br><br><br>
+<mat-card style="margin-right: 10%; margin-left: 10%;margin-top: 5%">
+  <h1 style="text-align: center">About {{project.projectName}} project</h1>
+  <p>Project name: {{project.projectName}}</p>
+  <p>Start date: {{project.startDate}}</p>
+  <p> Description: {{project.description}}</p>
+  <p> People needed: {{project.peopleNeeded}}</p>
+  <p>Technologies</p>
+  <li *ngFor="let t of project.technologies">{{t}}</li>
+  <br>
+  <button *ngIf="!project.ended" mat-raised-button color="accent" (click)="openDialog()">End project</button>
+  <button *ngIf="!project.ended" style="margin-left: 10px" mat-raised-button color="accent" (click)="assignEmployee()">Add employees to project</button>
+  <h1 *ngIf="project.ended" style="color: red; text-align: center"> Project has been ended at {{project.deadLineDate}}</h1>
+  <button *ngIf="project.ended" mat-raised-button color="primary" routerLink="/allProjects">Back to active projects</button>
+</mat-card>
+
+
+<mat-card *ngIf="project.employeesOnProject.length>0" style="margin-right: 10%; margin-left: 10%; margin-top: 5%">
+  <h1 style="text-align: center">Employees on project</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+
+      <th scope="col">Name</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Email</th>
+      <th scope="col">Employee details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let i of project.employeesOnProject">
+      <td> {{ i.name }}</td>
+      <td>{{ i.surname}}</td>
+      <td>{{ i.email}}</td>
+      <td>
+        <button  mat-raised-button color="primary" (click)="retrieveUserData(i.clientId)">Details</button>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</mat-card>

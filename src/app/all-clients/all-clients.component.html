@@ -1,0 +1,29 @@
+<br><br><br>
+<mat-card style="margin-right: 10%; margin-left: 10%">
+  <h1>All clients</h1>
+<table class="table table-striped">
+  <thead>
+  <tr>
+
+    <th scope="col">Name</th>
+    <th scope="col">Surname</th>
+    <th scope="col">Email</th>
+    <th scope="col">Details</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let i of clients">
+    <td> {{ i.name }}</td>
+    <td>{{ i.surname}}</td>
+    <td>{{ i.email}}</td>
+    <td ><button mat-raised-button color="primary" (click)="retrieveUserData(i.clientId)">Details</button></td>
+  </tr>
+  </tbody>
+</table>
+<mat-paginator [length]="length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="getAllClients($event)">
+</mat-paginator>
+</mat-card>
+

@@ -10,48 +10,6 @@ export class CrudService {
   constructor(private http: HttpClient) {
   }
 
-  retrieveAllEmployees(page, records): Observable<any> {
-    return this.http.get(`http://localhost:9090/admin/getAllEmployeesWithDepartments/${page}/${records}`);
-  }
-
-  retrieveAllEmployeesWithSort(sortProperty, sortOrder, phrase, page, records): Observable<any> {
-    return this.http
-      .get(`http://localhost:9090/admin/getAllEmployeesWithDepartments/sortBy/${sortProperty}/${sortOrder}/${phrase}/${page}/${records}`);
-  }
-
-  createEmp(empl): Observable<any> {
-    return this.http.post(`http://localhost:9090/admin/saveEmp`, empl);
-  }
-
-  createDepart(depart): Observable<any> {
-    return this.http.post(`http://localhost:9090/admin/saveDep`, depart);
-  }
-
-  getOneEmployee(id): Observable<any> {
-    return this.http.get(`http://localhost:9090/admin/getEmployeeById/${id}`);
-  }
-
-  getOneEmployeeDept(id): Observable<any> {
-    return this.http.get(`http://localhost:9090/admin/getEmpDeptById/${id}`);
-  }
-
-  getDepartNames(): Observable<any> {
-    return this.http.get(`http://localhost:9090/admin/getDepartmentNames`);
-  }
-
-  deleteEmployee(id): Observable<any> {
-    return this.http.delete(`http://localhost:9090/admin/delete/${id}`);
-  }
-
-  updateEmpDept(id, emp): Observable<any> {
-    console.log('im in updateEmp in service');
-    return this.http.put(`http://localhost:9090/admin/updateEmpDept/${id}`, emp);
-  }
-
-  possibleDepts(id): Observable<any> {
-    return this.http.get(`http://localhost:9090/admin/getDepartmentNamesExceptHavingByUser/${id}`);
-  }
-
   register(user): Observable<any> {
     return this.http.post(`http://localhost:9090/createAndSaveUser`, user);
   }
@@ -60,24 +18,102 @@ export class CrudService {
     return this.http.get(`http://localhost:9090/test`, {responseType: 'text'});
   }
 
-  countPages(phrase): Observable<any> {
-    return this.http.get(`http://localhost:9090/countPages/${phrase}`, {responseType: 'text'});
+  getUserNameAndSurname(): Observable<any> {
+    return this.http.get(`http://localhost:9090/userName`, {responseType: 'text'});
   }
 
-  authUsername(): Observable<any> {
-    return this.http.get(`http://localhost:9090/username`, {responseType: 'text'});
+  upload(file): Observable<any> {
+
+
+    const formData = new FormData();
+
+
+    formData.append('file', file, file.name);
+
+    return this.http.post(`http://localhost:9090/uploadFile`, formData);
   }
 
-  retrieveDataOfSpecyficUser(): Observable<any> {
-    return this.http.get(`http://localhost:9090/user/getAllEmps`);
+  saveEmployee(employee): Observable<any> {
+    return this.http.post(`http://localhost:9090/createUser`, employee);
   }
 
-  retrieveMyDepartment(): Observable<any> {
-    return this.http.get(`http://localhost:9090/user/getMyDepts`);
+  getInvoiceData(): Observable<any> {
+    return this.http.get(`http://localhost:9090/inv`);
   }
 
-  search(phrase, page, records): Observable<any> {
-    return this.http.get(`http://localhost:9090/admin/search/${phrase}/${page}/${records}`);
+  saveInvClient(invoice): Observable<any> {
+    return this.http.post(`http://localhost:9090/saveInvInClient`, invoice);
   }
 
+  retrieveSpecyficUserData(id): Observable<any> {
+    return this.http.get(`http://localhost:9090/getEmployee/${id}`);
+  }
+
+  enterNewProject(project): Observable<any> {
+    return this.http.post(`http://localhost:9090/addProj`, project);
+  }
+
+  addIssue(issue): Observable<any> {
+    return this.http.post(`http://localhost:9090/addIssue`, issue);
+  }
+
+  retrieveAllClients(page, size): Observable<any> {
+    return this.http.get(`http://localhost:9090/listAllEmployees/${page}/${size}`);
+  }
+
+  allEmpLen() {
+    return this.http.get(`http://localhost:9090/allEmpLength`, {responseType: 'text'});
+  }
+
+  retrieveProjectsForSpecyficUser(userId): Observable<any> {
+    return this.http.get(`http://localhost:9090/employeeProjects/${userId}`);
+  }
+
+  updateClientData(clientId, client): Observable<any> {
+    return this.http.put(`http://localhost:9090/updateEmployee/${clientId}`, client);
+  }
+
+  deleteClientById(clientId): Observable<any> {
+    return this.http.delete(`http://localhost:9090/deleteEmployee/${clientId}`);
+  }
+
+  displayProjectsList(page, size): Observable<any> {
+    return this.http.get(`http://localhost:9090/listProjects/${page}/${size}`);
+  }
+
+  allProjsLen() {
+    return this.http.get(`http://localhost:9090/listProjectsLength`, {responseType: 'text'});
+  }
+
+  getSpecProject(projectName): Observable<any> {
+    return this.http.get(`http://localhost:9090/project/${projectName}`);
+  }
+
+  endProject(projectName, project): Observable<any> {
+    return this.http.post(`http://localhost:9090/endOfProject/${projectName}`, project);
+  }
+
+  getClientInvoices(clientId): Observable<any> {
+    return this.http.get(`http://localhost:9090/clientInvoices/${clientId}`);
+  }
+
+  findInvoiceByNumber(invoiceNumber): Observable<any> {
+    return this.http.get(`http://localhost:9090/findInvoiceByNumber/${invoiceNumber}`, {responseType: 'text'});
+  }
+
+  getEmployeesToProject(projectName): Observable<any> {
+    return this.http.get(`http://localhost:9090/getEmployeesToProject/${projectName}`);
+  }
+
+  addEmpToSpecProj(project, clientId): Observable<any> {
+    return this.http.post(`http://localhost:9090/addEmpToSpecProj/${clientId}`, project);
+  }
+
+  getAllIssues(): Observable<any> {
+    return this.http.get(`http://localhost:9090/allIssues`);
+  }
+
+  getSpecIssue(issueID): Observable<any> {
+    return this.http.get(`http://localhost:9090/getIssue/${issueID}`);
+  }
 }

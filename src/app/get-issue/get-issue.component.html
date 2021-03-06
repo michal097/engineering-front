@@ -1,0 +1,8 @@
+
+<mat-card style="margin: 5%; text-align: center; background: #edfdff">
+<h1>Issue subcject: {{issue.issueTitle}}</h1>
+  <mat-card style="margin: 5%;">
+    <h2 style="text-align: center">Description</h2>
+<p [innerHTML]="getInnerHTMLData() | safeHtml"> </p>
+</mat-card>
+</mat-card>

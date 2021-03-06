@@ -1,0 +1,101 @@
+<br><br><br>
+<div class="content">
+<mat-card class="search_card" *ngIf="isAnySearchResultsInv || isAnySearchResultsCli || isAnySearchResultsExt">
+  <h1 style="text-align: center">Search results</h1>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Invoices
+      </mat-panel-title>
+      <mat-panel-description>
+        <a>{{invoice.length}} results</a>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">FV number</th>
+        <th scope="col">Costs</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of invoice">
+        <td> {{ i.invName }}</td>
+        <td>{{ i.invSurname}}</td>
+        <td>{{ i.fvNumber}}</td>
+        <td>{{ i.costs}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </mat-expansion-panel>
+  <br>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Employees
+      </mat-panel-title>
+      <mat-panel-description>
+        <a>{{employee.length}} results</a>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+
+        <th scope="col">Username</th>
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">Email</th>
+        <th scope="col">NIP</th>
+        <th scope="col">Details</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of employee">
+        <td> {{ i.username}}</td>
+        <td> {{ i.name }}</td>
+        <td>{{ i.surname}}</td>
+        <td>{{ i.email}}</td>
+        <td>{{ i.nip}}</td>
+        <td ><button mat-raised-button color="primary" (click)="retrieveUserData(i.clientId)">Details</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </mat-expansion-panel>
+  <br>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        External clients
+      </mat-panel-title>
+      <mat-panel-description>
+        <a>{{externalEmployee.length}} results</a>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+
+        <th scope="col">Name</th>
+        <th scope="col">Surname</th>
+        <th scope="col">NIP</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of externalEmployee">
+        <td> {{ i.name }}</td>
+        <td>{{ i.surname}}</td>
+        <td>{{ i.nip}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </mat-expansion-panel>
+
+</mat-card>
+<mat-card class="search_card" *ngIf="!isAnySearchResultsInv && !isAnySearchResultsCli && !isAnySearchResultsExt">
+  <h1 style="text-align: center">There is no search results</h1>
+</mat-card>
+</div>

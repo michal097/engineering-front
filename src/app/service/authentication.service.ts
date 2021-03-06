@@ -50,6 +50,10 @@ export class AuthenticationService {
   }
 
   isAdminAuthenticated(): any {
+    console.log(sessionStorage.getItem('auth'));
     return sessionStorage.getItem('auth') === '[ROLE_ADMIN]' && this.isUserLoggedIn();
+  }
+  isUserAuthenticated(): any {
+    return sessionStorage.getItem('auth') === '[ROLE_USER]' && this.isUserLoggedIn();
   }
 }

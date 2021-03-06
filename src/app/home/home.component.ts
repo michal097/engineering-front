@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CrudService} from "../service/crud.service";
+import {CrudService} from '../service/crud.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,18 +9,28 @@ import {CrudService} from "../service/crud.service";
 })
 export class HomeComponent implements OnInit {
 
-  isUser: string;
   isAuthenticatedAsUser: boolean;
+  isAuthenticatedAsAdmin: boolean;
+  userData: string;
 
-  constructor(private service: CrudService) {
+  constructor(private service: CrudService, private router: Router) {
   }
 
   ngOnInit() {
+    this.userData = '';
     this.checkAuth();
-    this.isAuthenticatedAsUser = this.isUser === '[ROLE_USER]';
+    this.getUserData();
   }
 
   checkAuth() {
-    this.service.auth().subscribe(data => this.isUser = data);
+    this.service.auth().subscribe(data => {
+      this.isAuthenticatedAsUser = data === '[ROLE_USER]';
+      this.isAuthenticatedAsAdmin = data === '[ROLE_ADMIN]';
+    });
+  }
+  getUserData(): void {
+    this.service.getUserNameAndSurname().subscribe(data => {
+      this.userData = data;
+    });
   }
 }

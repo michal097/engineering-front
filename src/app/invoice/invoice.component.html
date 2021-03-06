@@ -1,0 +1,72 @@
+<br><br><br><br>
+
+<button id="selectUploadFile" matTooltip="select file to upload" mat-raised-button (click)="openInput()">{{uploadButton}}</button>
+
+<input id="fileInput" hidden type="file" (change)="onChange($event)" name="file" accept=".png,.jpg,.gif">
+<button id="uploadFile" *ngIf="file" (click)="onUpload()"
+        mat-raised-button color="primary"
+        matTooltip="click here to upload file ">
+  Upload
+</button>
+
+<br><br><br>
+<div *ngIf="imageName">
+  <div id="loader" *ngIf="loading">
+    <mat-spinner>
+    </mat-spinner>
+  </div>
+</div>
+<div class="conte">
+<div id="card">
+    <mat-card  *ngIf="isImageLoaded">
+      <p *ngIf="userHasBeenCreated" class="alert alert-success">Invoice has been saved!!</p>
+      <p *ngIf="hasError" class="alert alert-danger">Invoice already exists in database</p>
+
+      <mat-form-field class="generate_employee">
+        <mat-label>Nr fv </mat-label>
+        <input type="text" style="text-align: left;" [(ngModel)]="client.fvNumber" name="client.name" matInput required="required"><br>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field class="generate_employee">
+        <mat-label>name </mat-label>
+        <input type="text" style="text-align: left;" [(ngModel)]="client.invName" name="client.name" matInput required="required"><br>
+
+      </mat-form-field>
+
+      <br>
+      <mat-form-field class="generate_employee">
+        <mat-label>surname </mat-label>
+        <input style="text-align: left" type="text" [(ngModel)]="client.invSurname" matInput required="required">
+
+      </mat-form-field>
+      <br>
+      <mat-form-field class="generate_employee">
+        <mat-label>NIP </mat-label>
+        <input style="text-align: left" type="text" [(ngModel)]="client.nip" name="client.name" matInput required="required"><br>
+
+      </mat-form-field>
+      <br>
+
+      <mat-form-field class="generate_employee">
+        <mat-label>Bank acc number </mat-label>
+        <input style="text-align: left" type="text" [(ngModel)]="client.bankAccNumber" name="client.name" matInput required="required"><br>
+
+      </mat-form-field>
+      <br>
+
+      <mat-form-field class="generate_employee">
+        <mat-label>To pay </mat-label>
+        <input style="text-align: left" type="text" [(ngModel)]="client.costs" name="client.cost" matInput required="required"><br>
+
+      </mat-form-field>
+      <br>
+
+      <button *ngIf="!userHasBeenCreated" id="saveClient" matTooltip="save client information" mat-raised-button color="primary" (click)="saveInv()">Save </button>
+
+    </mat-card>
+</div>
+  <div *ngIf=isImageLoaded id="imgInv"><img src="{{imageSource}}" alt="image" width="90%" height="90%"></div>
+
+</div>
+<br><br><br>

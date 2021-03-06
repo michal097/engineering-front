@@ -1,38 +1,64 @@
 <div class="heading"><p> ADD EMPLOYEE</p></div>
+<mat-card class="generate_employee_fields">
 
-<form (ngSubmit)="save()" >
-
-  <p *ngIf="createdMessage" class="err succ">{{createdMessage}}</p>
-
+  <h1 style="text-align: center">Create new employee</h1>
+  <p *ngIf="err" class="alert alert-danger">{{err}}</p>
   <br>
-  <div class="input validate">
+  <p *ngIf="userGeneratedMessage" class="alert alert-success">{{userGeneratedMessage}}</p>
+<mat-card class="generate_employee_fields">
+    <mat-form-field class="generate_employee">
+      <mat-label>Name </mat-label>
+      <input [(ngModel)]="emp.name" matInput required="required">
 
-    <input type="text" [(ngModel)]="emp.username" name="username" placeholder="username" required="required"> <a>  {{invUsername}} </a>
+    </mat-form-field>
 
-    <br>
+  <mat-form-field class="generate_employee">
+    <mat-label>Surname </mat-label>
+    <input [(ngModel)]="emp.surname" matInput required="required">
 
-    <input type="text" [(ngModel)]="emp.name" name="name" placeholder="name" required="required"><a>  {{invName}} </a>
+  </mat-form-field>
 
-  <br>
 
-    <input type="text" [(ngModel)]="emp.lastName" name="lastName" placeholder="last name" required="required"><a>  {{invLastName}} </a>
+  <mat-form-field class="generate_employee">
+      <mat-label>Email</mat-label>
+      <input type="email" [(ngModel)]="emp.email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher">
 
-  <br>
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  <mat-form-field class="generate_employee">
+    <mat-label>Adress </mat-label>
+    <input [(ngModel)]="emp.adress" matInput required="required">
 
-    <input type="text" [(ngModel)]="emp.age" name="age" placeholder="age" required="required"><a>  {{invAge}} </a>
+  </mat-form-field>
+  <mat-form-field class="generate_employee">
+    <mat-label>NIP </mat-label>
+    <input [(ngModel)]="emp.nip" matInput required="required">
 
-  <br>
+  </mat-form-field>
 
-    <input type="text" [(ngModel)]="emp.salary" name="salary" placeholder="salary" required="required"><a>  {{invSalary}} </a>
+  <mat-form-field class="generate_employee">
+    <mat-label>Skills</mat-label>
+    <mat-chip-list #chipList aria-label="Skills">
+      <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                [removable]="removable" (removed)="remove(fruit)">
+        {{fruit.name}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="Enter new skill..."
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="add($event)"
+              >
 
-  <br>
-  <a style="color: black; margin-left: 10px">select department </a><br>
-  <select [(ngModel)]="emp.department" name="department" required> // value is a string or number
-    <option value="" disabled selected >Select department</option>
-    <option *ngFor="let obj of depNames" [value]="obj">{{obj}}</option>
-</select>
-  </div>
-  <br><br><br><br><br>
+    </mat-chip-list>
+  </mat-form-field>
 
-  <button type="submit" class="button_edit button_save">Save</button>
-</form>
+  <button (click)="createNewUser()" type="submit"  mat-raised-button color="primary" class="generate_employee_button" >Save</button>
+
+</mat-card>

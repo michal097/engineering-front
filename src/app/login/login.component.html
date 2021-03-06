@@ -1,21 +1,57 @@
-<div class="heading"><p>Login</p></div>
-       <p class="err" *ngIf="error">  {{ error }} </p>
-<form>
-
-  <div class="input">
+<div class="content">
+    <mat-card>
+      <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Login">
     <p>
-      <input placeholder="Username" [(ngModel)]="username" name="username" required>
+    <mat-form-field class="login_input" appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+    </mat-form-field>
     </p>
     <p>
-      <input placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+      <mat-form-field class="login_input" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+      </mat-form-field>
+    </p>
+      <p *ngIf="error" class="alert alert-danger">{{error}}</p>
+
+
+      <button class="login_button" mat-raised-button color="primary" (click)="checkLogin()">Login</button>
+  </mat-tab>
+  <mat-tab label="Register">
+    <p>
+      <mat-form-field class="login_input" appearance="outline">
+        <mat-label>Username (given by admin)</mat-label>
+        <input matInput placeholder="Username" [(ngModel)]="user.username" type="text" name="Username" required>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="login_input" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Password" [(ngModel)]="user.password" type="password" name="password" required>
+      </mat-form-field>
     </p>
 
+    <p>
+      <mat-form-field class="login_input" appearance="outline">
+        <mat-label>Repeat password</mat-label>
+        <input matInput placeholder="Repeat password" [(ngModel)]="passwordRepeat" type="password" name="password" required>
+      </mat-form-field>
 
+    </p>
 
-  </div>
-  <button class="button_edit button_save" (click)="checkLogin()" id="log">Login</button>
-
-</form>
+    <button class="login_button" mat-raised-button color="primary" (click)="register();saveUser()">Register</button>
+    <br>
+    <br>
+    <p *ngIf="invalidPass" class="alert alert-danger">{{invalidPass}}</p>
+    <br>
+    <p *ngIf="userGeneratedMessage" class="alert alert-success">{{userGeneratedMessage}}</p>
+    <p *ngIf="err" class="alert alert-danger">{{err}}</p>
+  </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+</div>
 
 
 

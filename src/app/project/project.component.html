@@ -1,0 +1,75 @@
+<br><br><br>
+<div style="margin-left: 20%; margin-right: 20%">
+<p *ngIf="err" class="alert alert-danger">{{err}}</p>
+<br>
+<p *ngIf="projectSuccess" class="alert alert-success">{{projectSuccess}}</p>
+</div>
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+  <mat-step>
+      <ng-template matStepLabel>Fill out project infos</ng-template>
+      <mat-form-field>
+        <input [(ngModel)]="project.projectName"  matInput placeholder="Enter project name" required>
+      </mat-form-field>
+    <br>
+    <mat-form-field>
+      <textarea [(ngModel)]="project.description"  matInput placeholder="Enter project description" required></textarea>
+    </mat-form-field><br>
+    <mat-form-field >
+      <mat-label>Technologies</mat-label>
+      <mat-chip-list #chipList aria-label="Skills">
+        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                  [removable]="removable" (removed)="remove(fruit)">
+          {{fruit.name}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Enter new skill..."
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="add($event)"
+        >
+
+      </mat-chip-list>
+    </mat-form-field>
+
+      <div>
+        <button (click)="makeSkillsArr()" mat-button matStepperNext>Next</button>
+      </div>
+  </mat-step>
+  <mat-step label="Add project duration">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Choose a start date</mat-label>
+      <input matInput [(ngModel)]="project.startDate" [matDatepicker]="picker" >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #picker></mat-datepicker>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="number" [(ngModel)]="project.peopleNeeded"  matInput placeholder="How many people do you need??" required>
+    </mat-form-field>
+
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Summary</ng-template>
+
+      <p>project name: {{project.projectName}}</p>
+      <p>project desc: {{project.description}}</p>
+    <p>technologies</p>
+    <li *ngFor="let t of project.technologies">{{t}}</li><br>
+    <p>start date: {{convert(project.startDate)}}</p>
+    <p>people on project: {{project.peopleNeeded}}</p>
+    <div *ngIf="!projectSuccess">
+    <button style="margin-right: 30%;margin-left: 30%; width: 40%; text-align: center" (click)="saveProject()" mat-raised-button color="primary">Save project</button>
+      <br>
+
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+

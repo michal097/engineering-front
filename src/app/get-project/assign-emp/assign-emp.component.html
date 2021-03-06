@@ -1,0 +1,21 @@
+<p style="text-align: center">Assign employee to project</p>
+<a *ngIf="emp.length==0">There is no available employees</a>
+<table *ngIf="emp.length>0" class="table table-striped">
+  <thead>
+  <tr>
+
+    <th scope="col">Name</th>
+    <th scope="col">Surname</th>
+    <th scope="col">Email</th>
+    <th scope="col">Assign</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let i of emp">
+    <td> {{ i.name }}</td>
+    <td>{{ i.surname}}</td>
+    <td>{{ i.email}}</td>
+    <td ><button mat-raised-button color="primary" (click)="addEmpToProject(i.clientId)" >Assign</button></td>
+  </tr>
+  </tbody>
+</table>

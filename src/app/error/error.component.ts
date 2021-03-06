@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-error',
@@ -6,13 +6,10 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./error.component.scss']
 })
 export class ErrorComponent implements OnInit {
-  errorMessage: string;
 
-  constructor() {
-  }
+  constructor() { }
 
   ngOnInit() {
-    this.errorMessage = 'Page not found 404';
   }
 
 }

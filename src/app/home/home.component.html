@@ -1,40 +1,15 @@
-<div class="banner">
-  <p>ACME COMPANY</p>
-</div>
+<br> <br><br>
+<div *ngIf="!isAuthenticatedAsUser && !isAuthenticatedAsAdmin" class="back">
 
-<div class="content">
-  <div class="row">
+  <div class="homeContent">
+  <div class="header"><p>Start your adventure with the best program in the world!</p></div>
+  <button mat-raised-button color="warn" routerLink="login">GET STARTED</button>
+  </div>
+  </div>
 
-    <div class="column" id="column2">
-      <img id="floated2" alt="img2"
-           src="assets/download.jpg"
-           width="250" height="250">
-      <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisis vehicula urna, feugiat vehicula
-        felis sagittis in.</a>
-      <a>Proin eget ante auctor, commodo elit at, tempus nulla. Mauris aliquam nibh id ultrices porta. Morbi
-        consectetur dolor id dolor aliquam,</a>
-      <a>quis consectetur lacus laoreet. Cras aliquam sem et purus ornare facilisis. Quisque pellentesque justo
-        nisl, in cursus nunc bibendum sit amet.</a>
-      <a>Nullam tincidunt lectus sit amet diam pharetra suscipit. Nunc feugiat magna id mauris vulputate
-        porttitor. </a>
-      <a>Fusce blandit congue erat, at aliquam leo varius id. Ut ut arcu non erat molestie posuere. Quisque
-        sodales urna eu vehicula convallis.
-        Nulla nec nunc eget neque viverra pellentesque a a diam. Sed interdum ligula ligula, in accumsan turpis
-        porttitor non.
-        Maecenas facilisis libero et scelerisque congue.</a>
-      <a>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisis vehicula urna, feugiat vehicula
-        felis sagittis in.</a>
-      <a>Proin eget ante auctor, commodo elit at, tempus nulla. Mauris aliquam nibh id ultrices porta. Morbi
-        consectetur dolor id dolor aliquam,</a>
-      <a>quis consectetur lacus laoreet. Cras aliquam sem et purus ornare facilisis. Quisque pellentesque justo
-        nisl, in cursus nunc bibendum sit amet.</a>
-      <a>Nullam tincidunt lectus sit amet diam pharetra suscipit. Nunc feugiat magna id mauris vulputate
-        porttitor. </a>
-      <a>Fusce blandit congue erat, at aliquam leo varius id. Ut ut arcu non erat molestie posuere. Quisque
-        sodales urna eu vehicula convallis.
-        Nulla nec nunc eget neque viverra pellentesque a a diam. Sed interdum ligula ligula, in accumsan turpis
-        porttitor non.
-        Maecenas facilisis libero et scelerisque congue.</a>
-    </div>
+<div *ngIf="isAuthenticatedAsUser || isAuthenticatedAsAdmin" class="back">
+  <div class="homeContent">
+    <div class="header"><p>Hello there, {{userData}}</p></div>
+    <button mat-raised-button color="warn" routerLink="addInvoice">TRY TO ADD INVOICE</button>
   </div>
 </div>

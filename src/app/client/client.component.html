@@ -1,0 +1,86 @@
+<br>
+
+<mat-card *ngIf="client" style="margin: 5%">
+  <h1 style="text-align: center">Information about user {{client.username}}</h1>
+  <p>username: {{client.username}}</p>
+  <p>name: {{client.name}}</p>
+  <p>surname: {{client.surname}}</p>
+  <p>adress: {{client.adress}}</p>
+  <p>nip: {{client.nip}}</p>
+  <p>email: {{client.email}}</p>
+
+
+<p>skills </p>
+<li *ngFor="let c of client.skills">{{c}}</li><br>
+  <button mat-raised-button color="primary" (click)="openDialog()">Update</button>
+  <button style="margin-left: 10px" mat-raised-button color="warn" (click)="openDelDialog()">  Delete</button>
+</mat-card>
+
+
+<mat-expansion-panel hideToggle style="margin-right: 10%; margin-left: 10%" *ngIf="length>0">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Emp projects
+    </mat-panel-title>
+    <mat-panel-description>
+      <a>{{length}} results</a>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+<mat-card >
+  <h1 style="text-align: center">Emp projects</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+
+      <th scope="col">Project name</th>
+      <th scope="col">Start date</th>
+      <th scope="col">Project details</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let i of projects">
+      <td> {{ i.projectName }}</td>
+      <td>{{ i.startDate}}</td>
+      <td ><button mat-raised-button color="primary" (click)="retrieveProjectData(i.projectName)">More info</button></td>
+    </tr>
+    </tbody>
+  </table>
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions">
+  </mat-paginator>
+</mat-card>
+</mat-expansion-panel>
+<br>
+<mat-expansion-panel hideToggle style="margin-right: 10%; margin-left: 10%" *ngIf="invoice.length>0" >
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Emp invoices
+    </mat-panel-title>
+    <mat-panel-description>
+      <a>{{invoice.length}} results</a>
+      </mat-panel-description>
+  </mat-expansion-panel-header>
+<mat-card  >
+  <h1 style="text-align: center">Emp invoices</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+
+      <th scope="col">Fv number</th>
+      <th scope="col">Costs</th>
+      <th scope="col">Invoice details</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let i of invoice">
+      <td> {{ i.fvNumber }}</td>
+      <td>{{ i.costs}}</td>
+      <td ><button mat-raised-button color="primary" (click)=" openInvoiceDialog(i.fvNumber)">More info</button></td>
+    </tr>
+    </tbody>
+  </table>
+</mat-card>
+</mat-expansion-panel>

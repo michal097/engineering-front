@@ -1,0 +1,13 @@
+
+<div>
+  <p *ngIf="invalidPhrase" class="alert alert-danger">{{invalidPhrase}}</p>
+  <h1 mat-dialog-title>Delete user</h1>
+  <p>Are you sure you wanna delete this user permanently?</p>
+  <p>to proof your action enter <b>{{client.username}}</b> phrase</p>
+  <mat-form-field style="width: 400px">
+    <mat-label>phrase to delete</mat-label>
+    <input matInput [(ngModel)]="phrase">
+  </mat-form-field>
+  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-raised-button color="warn" (click)="deleteClient(data.clientId)" cdkFocusInitial>Ok</button>
+</div>

@@ -1,0 +1,29 @@
+<br><br><br><br>
+<mat-card style="margin-right: 10%; margin-left: 10%">
+  <h1 style="text-align: center">All projects</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Start date</th>
+      <th scope="col">Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let i of projects">
+      <td> {{ i.projectName }}</td>
+      <td>{{ i.description}}</td>
+      <td>{{ i.startDate}}</td>
+      <td ><button mat-raised-button color="primary" (click)="retrieveProjectData(i.projectName)">Details</button></td>
+    </tr>
+    </tbody>
+  </table>
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="getProjects($event)">
+  </mat-paginator>
+</mat-card>
+

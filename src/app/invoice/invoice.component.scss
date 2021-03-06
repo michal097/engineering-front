@@ -1,0 +1,57 @@
+#clientInv {
+
+  float: left;
+  margin-left: 30px;
+}
+
+#invoiceImg {
+  float: right;
+
+}
+
+#imgInv{
+
+  width: 60%;
+  margin-right: 5%;
+}
+#card{
+  margin-left: 5%;
+  width: 40%;
+
+}
+
+#selectUploadFile {
+  background-color: #999c9f;
+  width: 60%;
+  margin: 40px 20%;
+  text-align: center;
+}
+
+#uploadFile {
+  width: 30%;
+  margin: 5px 35%;
+
+}
+
+#saveClient {
+  text-align: center;
+
+}
+
+.generate_employee {
+  width: 100%;
+
+}
+
+#loader {
+  margin-left: 47%;
+  margin-right: 47%;
+
+}
+
+.conte{
+
+  display: flex;
+  align-items: normal;
+  column-gap: 20px;
+}

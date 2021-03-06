@@ -1,16 +1,26 @@
 import {Component, OnInit} from '@angular/core';
 import {CrudService} from '../service/crud.service';
+import {ErrorStateMatcher} from '@angular/material/core';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {COMMA, SPACE} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material/chips';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
+
+
+export interface Skills {
+  name: string;
+}
 
 export class Employee {
-  constructor(public name: string,
-              public username: string,
-              public lastName: string,
-              public age: number,
-              public salary: number,
-              public department: string,
-              public empDeptId: number,
-              public empName: string) {
+  skills: string[];
 
+  constructor() {
   }
 }
 
@@ -19,82 +29,78 @@ export class Employee {
   templateUrl: './generate-employee.component.html',
   styleUrls: ['./generate-employee.component.scss']
 })
+
+
 export class GenerateEmployeeComponent implements OnInit {
 
-  emp: Employee;
-  createdMessage: string;
-  mess: string;
-  depNames = [];
 
-  invName: string;
-  invUsername: string;
-  invLastName: string;
-  invAge: string;
-  invSalary: string;
-  invDepart: string;
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+  matcher = new MyErrorStateMatcher();
 
   constructor(private service: CrudService) {
   }
 
+  emp: Employee;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  skills: string[] = [];
+  readonly separatorKeysCodes: number[] = [SPACE, COMMA];
+  fruits: Skills[] = [];
+  userGeneratedMessage = '';
+  err = '';
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    if ((value || '').trim()) {
+      this.fruits.push({name: value.trim()});
+    }
+
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  makeSkillsArr(): string[] {
+    this.skills = [];
+    for (let i = 0; i < this.fruits.length; i++) {
+      this.skills.push(this.fruits[i].name);
+    }
+
+    return this.skills;
+  }
+
+  createNewUser(): void {
+    this.emp.skills = this.makeSkillsArr();
+    this.service.saveEmployee(this.emp).subscribe(
+      () => this.success(),
+      () => this.errors());
+  }
+
+  success() {
+    this.userGeneratedMessage = 'New employee has beed added';
+    this.err = '';
+  }
+
+  errors() {
+    this.err = 'Error occured during assing new user!';
+    this.userGeneratedMessage = '';
+  }
+
+  remove(fruit: Skills): void {
+    const index = this.fruits.indexOf(fruit);
+
+    if (index >= 0) {
+      this.fruits.splice(index, 1);
+    }
+  }
+
   ngOnInit() {
-    this.emp = new Employee(null, null, null, null, null, null, null, null);
-    this.getDepNames();
-
-  }
-
-  saveEmp(): void {
-    console.log(this.emp);
-    this.service.createEmp(this.emp).subscribe(
-      () => this.fushData(),
-      () => this.validateEmp(this.emp)
-    );
-  }
-
-
-  getDepNames(): void {
-    this.service.getDepartNames().subscribe(
-      response => this.depNames = response
-    );
-  }
-
-  save(): void {
-    this.saveEmp();
-
-  }
-
-  fushData(): void {
-    this.createdMessage = 'Employee has been created!';
-    this.emp = new Employee(null, null, null, null, null, null, null, null);
-
-  }
-
-  validateEmp(emp) {
-    if (emp.username === '' || emp.username === null) {
-      this.invUsername = 'Invalid username';
-    } else {
-      this.invUsername = '';
-    }
-    if (emp.name === '' || emp.name === null) {
-      this.invName = 'invalid name';
-    } else {
-      this.invName = '';
-    }
-    if (emp.age < 18) {
-      this.invAge = 'Wrong age (18 minimum)';
-    } else {
-      this.invAge = '';
-    }
-    if (emp.lastName === '' || emp.lastName === null) {
-      this.invLastName = 'invalid last name';
-    } else {
-      this.invLastName = '';
-    }
-    if (emp.salary < 3000 || emp.salary === null) {
-      this.invSalary = 'indalid salary (min 3000)';
-
-    } else {
-      this.invSalary = '';
-    }
-    this.createdMessage = '';
+    this.emp = new Employee();
   }
 }
