@@ -3,14 +3,18 @@ import {CrudService} from '../service/crud.service';
 import {ActivatedRoute} from '@angular/router';
 import {Issue} from '../issue/issue.component';
 import {DomSanitizer} from '@angular/platform-browser';
+import {AngularEditorConfig} from "@kolkov/angular-editor";
 
-@Pipe({ name: 'safeHtml'})
-export class SafeHtmlPipe implements PipeTransform  {
-  constructor(private sanitized: DomSanitizer) {}
+@Pipe({name: 'safeHtml'})
+export class SafeHtmlPipe implements PipeTransform {
+  constructor(private sanitized: DomSanitizer) {
+  }
+
   transform(value) {
     return this.sanitized.bypassSecurityTrustHtml(value);
   }
 }
+
 @Component({
   selector: 'app-get-issue',
   templateUrl: './get-issue.component.html',
@@ -20,6 +24,50 @@ export class GetIssueComponent implements OnInit {
 
   issue: Issue;
   issueId: string;
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: 'auto',
+    sanitize: false,
+    minHeight: '300px',
+    maxHeight: '300px',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Enter text here...',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    fonts: [
+      {class: 'times-new-roman', name: 'Times New Roman'}
+    ],
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    uploadUrl: 'v1/image',
+    //  upload: (file: File) => {},
+    uploadWithCredentials: false,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      ['bold', 'italic'],
+      ['fontSize']
+    ]
+  };
 
   constructor(private service: CrudService, private router: ActivatedRoute) {
   }
@@ -34,8 +82,15 @@ export class GetIssueComponent implements OnInit {
 
   }
 
+  saveIssueSolution(): void {
+    this.service.saveIssueSolution(this.issue).subscribe(data => this.issue = data);
+  }
+
+  makeWorkInPro(): void {
+    this.service.makeWorkInProgress(this.issue).subscribe(data => this.issue = data);
+  }
+
   getInnerHTMLData(): any {
-    console.log(this.issue.issueDetails);
     return this.issue.issueDetails;
   }
 }

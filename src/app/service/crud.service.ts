@@ -116,4 +116,14 @@ export class CrudService {
   getSpecIssue(issueID): Observable<any> {
     return this.http.get(`http://localhost:9090/getIssue/${issueID}`);
   }
+
+  makeWorkInProgress(issue): Observable<any> {
+    return this.http.post(`http://localhost:9090/makeWorkInProgress`, issue);
+  }
+  saveIssueSolution(issue): Observable<any> {
+    return this.http.post(`http://localhost:9090/saveIssueSolution`, issue);
+  }
+  getCountIssues(): Observable<any> {
+    return this.http.get(`http://localhost:9090/issuesCount`, {responseType: 'text'});
+  }
 }

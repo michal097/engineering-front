@@ -5,6 +5,7 @@ import {FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ConnectHeaderSeachService} from '../service/connect-header-seach.service';
 import {Client} from '../client/client.component';
+import {datepickerAnimation} from "ngx-bootstrap/datepicker/datepicker-animations";
 
 @Component({
   selector: 'app-header',
@@ -28,7 +29,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+
     window.addEventListener('scroll', this.scroll, true);
+    this.service.getCountIssues().subscribe(data => console.log(data));
+
     this.checkAuth();
     setInterval(() => {
       this.checkAuth();

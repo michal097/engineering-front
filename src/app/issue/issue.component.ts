@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {AngularEditorConfig} from "@kolkov/angular-editor";
-import {CrudService} from "../service/crud.service";
+import {AngularEditorConfig} from '@kolkov/angular-editor';
+import {CrudService} from '../service/crud.service';
 
 export class Issue {
   issueTitle: string;
   issueDetails: string;
+  solution: string;
 
 }
 
