@@ -68,5 +68,7 @@
   </mat-radio-group>
 
   <button *ngIf="!userGeneratedMessage" (click)="createNewUser()" type="submit"  mat-raised-button color="primary" class="generate_employee_button" >Save</button>
+  <button *ngIf="userGeneratedMessage" (click)="goToAllEmps()" mat-raised-button color="warn" class="generate_employee_button" >Go to all employees</button>
+
 </mat-card>
 </mat-card>

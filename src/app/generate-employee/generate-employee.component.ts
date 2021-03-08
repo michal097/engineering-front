@@ -102,7 +102,9 @@ export class GenerateEmployeeComponent implements OnInit {
     }
   }
 
-
+  goToAllEmps(): void {
+    this.route.navigate(['allClients']);
+  }
 
   ngOnInit() {
     this.emp = new Employee();

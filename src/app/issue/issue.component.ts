@@ -1,12 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import {AngularEditorConfig} from '@kolkov/angular-editor';
 import {CrudService} from '../service/crud.service';
+import {Route, Router} from "@angular/router";
+import {DomSanitizer} from "@angular/platform-browser";
 
 export class Issue {
   issueTitle: string;
   issueDetails: string;
   solution: string;
 
+}
+@Pipe({name: 'safeHtml'})
+export class SafeHtmlPipeline implements PipeTransform {
+  constructor(private sanitized: DomSanitizer) {
+  }
+
+  transform(value) {
+    return this.sanitized.bypassSecurityTrustHtml(value);
+  }
 }
 
 @Component({
@@ -16,7 +27,8 @@ export class Issue {
 })
 export class IssueComponent implements OnInit {
 
-  constructor(private service: CrudService) {
+  issueHasBeenAdded: string;
+  constructor(private service: CrudService, private route: Router) {
   }
 
   issue: Issue;
@@ -71,6 +83,10 @@ export class IssueComponent implements OnInit {
 
   addNewIssue(): void {
     console.log(this.issue.issueDetails);
-    this.service.addIssue(this.issue).subscribe();
+    this.service.addIssue(this.issue).subscribe( () => this.issueHasBeenAdded = 'Issue has been added');
+  }
+
+  goToMyIssues(): void {
+    this.route.navigate(['allIssues']);
   }
 }

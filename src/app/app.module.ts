@@ -26,7 +26,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {ImageCropperModule} from 'ngx-image-cropper';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {IssueComponent} from './issue/issue.component';
+import {IssueComponent, SafeHtmlPipeline} from './issue/issue.component';
 import {AngularEditorModule} from '@kolkov/angular-editor';
 import {AllClientsComponent} from './all-clients/all-clients.component';
 import {ClientComponent} from './client/client.component';
@@ -36,7 +36,7 @@ import {ProjectListComponent} from './project-list/project-list.component';
 import {GetProjectComponent} from './get-project/get-project.component';
 import {EndProjectComponent} from './get-project/end-project/end-project.component';
 import {ClientInvoiceComponent} from './client/client-invoice/client-invoice.component';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { AssignEmpComponent } from './get-project/assign-emp/assign-emp.component';
 import { AllIssueComponent } from './all-issue/all-issue.component';
 import {GetIssueComponent, SafeHtmlPipe} from './get-issue/get-issue.component';
@@ -68,7 +68,8 @@ import {GetIssueComponent, SafeHtmlPipe} from './get-issue/get-issue.component';
     AssignEmpComponent,
     AllIssueComponent,
     GetIssueComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    SafeHtmlPipeline
   ],
   imports: [
     BrowserModule,
