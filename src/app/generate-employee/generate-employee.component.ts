@@ -4,6 +4,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {COMMA, SPACE} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
+import {ActivatedRoute, Router} from "@angular/router";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -19,6 +20,7 @@ export interface Skills {
 
 export class Employee {
   skills: string[];
+  userType: string;
 
   constructor() {
   }
@@ -40,7 +42,7 @@ export class GenerateEmployeeComponent implements OnInit {
   ]);
   matcher = new MyErrorStateMatcher();
 
-  constructor(private service: CrudService) {
+  constructor(private service: CrudService, private route: Router) {
   }
 
   emp: Employee;
@@ -99,6 +101,8 @@ export class GenerateEmployeeComponent implements OnInit {
       this.fruits.splice(index, 1);
     }
   }
+
+
 
   ngOnInit() {
     this.emp = new Employee();

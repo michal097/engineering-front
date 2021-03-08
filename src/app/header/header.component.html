@@ -19,7 +19,7 @@
         <a class="nav-link" routerLink="/project">Add project</a>
       </li>
       <li *ngIf="isLoggedIn" class="nav-item">
-        <a class="nav-link" matBadge="2" [matBadgeHidden]="hidden" (click)="hideBadge()" routerLink="/issue">Report issue</a>
+        <a class="nav-link" routerLink="/issue">Report issue</a>
       </li>
       <li *ngIf="!isAuth&&isLoggedIn" class="nav-item">
         <a class="nav-link" routerLink="/allClients">All clients</a>

@@ -31,7 +31,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     window.addEventListener('scroll', this.scroll, true);
-    this.service.getCountIssues().subscribe(data => console.log(data));
 
     this.checkAuth();
     setInterval(() => {

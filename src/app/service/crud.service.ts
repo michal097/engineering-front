@@ -123,7 +123,5 @@ export class CrudService {
   saveIssueSolution(issue): Observable<any> {
     return this.http.post(`http://localhost:9090/saveIssueSolution`, issue);
   }
-  getCountIssues(): Observable<any> {
-    return this.http.get(`http://localhost:9090/issuesCount`, {responseType: 'text'});
-  }
+
 }
