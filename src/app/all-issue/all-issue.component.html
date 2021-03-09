@@ -14,7 +14,7 @@
     <tr *ngFor="let i of issue">
       <td> {{ i.issueTitle }}</td>
       <td>{{ i.status}}</td>
-      <td>{{ i.reporter}}</td>
+      <td>{{ i.reporter.name}} {{i.reporter.surname}}</td>
       <td ><button mat-raised-button color="primary" (click)="redirectToIssue(i.issueId)" >Details</button></td>
     </tr>
     </tbody>

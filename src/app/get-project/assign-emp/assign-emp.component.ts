@@ -31,16 +31,19 @@ export class AssignEmpComponent implements OnInit {
       this.emp = data;
       this.getProjectData();
     });
+
   }
 
   addEmpToProject(clientId): void {
-    this.service.addEmpToSpecProj(this.project, clientId).subscribe();
-    this.getEmpToProj();
+    this.service.addEmpToSpecProj(this.project, clientId).subscribe(() => this.getEmpToProj());
   }
+
   getProjectData(): void {
     this.service.getSpecProject(this.project.projectName).subscribe(data => {
       this.project = data;
     });
   }
-
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

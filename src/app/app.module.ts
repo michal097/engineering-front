@@ -40,6 +40,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { AssignEmpComponent } from './get-project/assign-emp/assign-emp.component';
 import { AllIssueComponent } from './all-issue/all-issue.component';
 import {GetIssueComponent, SafeHtmlPipe} from './get-issue/get-issue.component';
+import { HolidayProposalComponent } from './holiday-proposal/holiday-proposal.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import {GetIssueComponent, SafeHtmlPipe} from './get-issue/get-issue.component';
     AllIssueComponent,
     GetIssueComponent,
     SafeHtmlPipe,
-    SafeHtmlPipeline
+    SafeHtmlPipeline,
+    HolidayProposalComponent
   ],
   imports: [
     BrowserModule,

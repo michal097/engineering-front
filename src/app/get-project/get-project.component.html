@@ -15,8 +15,9 @@
 </mat-card>
 
 
-<mat-card *ngIf="project.employeesOnProject.length>0" style="margin-right: 10%; margin-left: 10%; margin-top: 5%">
+<mat-card *ngIf="project.employeesOnProject.length>0 && project.employeesOnProject.name !== ''" style="margin-right: 10%; margin-left: 10%; margin-top: 5%">
   <h1 style="text-align: center">Employees on project</h1>
+  {{project.employeesOnProject.name}}
   <table class="table table-striped">
     <thead>
     <tr>

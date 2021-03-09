@@ -88,6 +88,7 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() {
     this.project = new Project('', '', '', '', '', '');
+    console.log(this.project.employeesOnProject);
   }
 
 
