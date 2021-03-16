@@ -1,0 +1,8 @@
+<p>Are you sure you wanna pay <b>{{data.costs}}</b></p>
+<p>to bank account <b>{{data.bankAccNumber}}</b></p>
+<p>related to invoice number <b>{{data.fvNumber}}</b> ?</p>
+
+<button mat-button (click)="onNoClick()">Close</button>
+<button style="margin-left: 5%" mat-raised-button color="warn" (click)="makePayment()">Aprove</button>
+
+

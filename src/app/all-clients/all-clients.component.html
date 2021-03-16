@@ -1,6 +1,16 @@
 <br><br><br>
 <mat-card style="margin-right: 10%; margin-left: 10%">
   <h1>All clients</h1>
+  <br><br>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Internal clients
+      </mat-panel-title>
+      <mat-panel-description>
+        <a>{{length}} results</a>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
 <table class="table table-striped">
   <thead>
   <tr>
@@ -25,5 +35,41 @@
                [pageSizeOptions]="pageSizeOptions"
                (page)="getAllClients($event)">
 </mat-paginator>
-</mat-card>
+  </mat-expansion-panel>
+<br><br>
+<mat-expansion-panel hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      External clients
+    </mat-panel-title>
+    <mat-panel-description>
+      <a> {{externalClients.length}} results</a>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <table class="table table-striped">
+    <thead>
+    <tr>
 
+      <th scope="col">Name</th>
+      <th scope="col">Surname</th>
+      <th scope="col">NIP</th>
+      <th scope="col">Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let i of externalClients">
+      <td> {{ i.name }}</td>
+      <td>{{ i.surname}}</td>
+      <td>{{ i.nip}}</td>
+      <td><button mat-raised-button color="primary" (click)="navigateToExternalClient(i.externalClientId)">External client details </button> </td>
+    </tr>
+    </tbody>
+  </table>
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="getAllClients($event)">
+  </mat-paginator>
+</mat-expansion-panel>
+
+</mat-card>

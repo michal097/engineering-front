@@ -1,0 +1,27 @@
+<br><br><br>
+
+
+<mat-card class="style_card">
+  <p *ngIf="inv.paid" class="alert alert-success">Payment has been successfully done</p>
+  <h1>Invoice info</h1>
+  <br>
+  <p>Name</p>
+  <a>{{inv.invName}}</a><br><br>
+  <p>Surname</p>
+  <a>{{inv.invSurname}}</a><br><br>
+  <p>Invoice number</p>
+  <a>{{inv.fvNumber}}</a><br><br>
+  <p>Bank account</p>
+  <a>{{inv.bankAccNumber}}</a><br><br>
+  <p>NIP</p>
+  <a>{{inv.nip}}</a><br><br>
+  <p>Costs</p>
+  <a>{{inv.costs}}</a>
+  <br><br><br>
+  <div *ngIf="!inv.paid">
+  <button mat-raised-button color="accent" (click)="openInvoiceDialog()">Invoice preview</button>
+  <button style="margin-left: 5%" mat-raised-button color="primary" (click)="openPaymentDialog()">Make payment</button>
+  </div>
+ </mat-card>
+
+

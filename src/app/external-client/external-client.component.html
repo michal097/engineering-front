@@ -1,0 +1,45 @@
+<mat-card *ngIf="externalClient" style="margin: 5%">
+  <h1 style="text-align: center">Information about user external client {{externalClient.name}} {{externalClient.surname}}</h1>
+  <p>Name: {{externalClient.name}}</p>
+  <p>Surname: {{externalClient.surname}}</p>
+  <p>NIP: {{externalClient.nip}}</p>
+  <p>Bank account: {{externalClient.bankAccNumber}}</p>
+
+</mat-card>
+
+
+<mat-expansion-panel *ngIf="invoices.length>0" hideToggle style="margin-right: 10%; margin-left: 10%">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      External client invoices
+    </mat-panel-title>
+    <mat-panel-description>
+      <a>{{invoices.length}} results</a>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-card >
+    <h1 style="text-align: center">External client invoices</h1>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+
+        <th scope="col">Invoice number</th>
+        <th scope="col">Costs</th>
+        <th scope="col">More info</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of invoices">
+        <td> {{ i.fvNumber }}</td>
+        <td>{{ i.costs}}</td>
+        <td ><button mat-raised-button color="primary" (click)="navigateToInvoice(i.invoiceId)" >More info</button></td>
+      </tr>
+      </tbody>
+    </table>
+    <mat-paginator [length]="length"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="pageSizeOptions">
+    </mat-paginator>
+  </mat-card>
+</mat-expansion-panel>

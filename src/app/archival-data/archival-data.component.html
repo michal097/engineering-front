@@ -1,0 +1,97 @@
+<br><br><br>
+
+<mat-card style="margin-right: 10%; margin-left: 10%; margin-top: 5%">
+  <h1 style="text-align: center;">Archival data</h1>
+  <mat-expansion-panel  hideToggle style="margin-right: 10%; margin-left: 10%">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Archival Issue
+      </mat-panel-title>
+      <mat-panel-description>
+        <a>{{issues.length}} results</a>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  <h1 style="text-align: center">All finished issues</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Status</th>
+      <th scope="col">Reporter</th>
+      <th scope="col">Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let i of issues">
+      <td> {{ i.issueTitle }}</td>
+      <td>{{ i.status}}</td>
+      <td>{{ i.reporter.name}} {{i.reporter.surname}}</td>
+      <td ><button mat-raised-button color="primary" (click)="navigatetoIssue(i.issueId)" >Details</button></td>
+    </tr>
+    </tbody>
+  </table>
+  </mat-expansion-panel>
+  <br>
+  <mat-expansion-panel *ngIf="invoices.length>0" hideToggle style="margin-right: 10%; margin-left: 10%">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Archival Invoices
+      </mat-panel-title>
+      <mat-panel-description>
+        <a>{{invoices.length}} results</a>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <h1 style="text-align: center">Archival invoices</h1>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+
+        <th scope="col">Fv number</th>
+        <th scope="col">Costs</th>
+        <th scope="col">Invoice details</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let i of invoices">
+        <td> {{ i.fvNumber }}</td>
+        <td>{{ i.costs}}</td>
+        <td ><button mat-raised-button color="primary" (click)="navigatetoInvoice(i.invoiceId)">More info</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </mat-expansion-panel>
+<br>
+  <mat-expansion-panel hideToggle style="margin-right: 10%; margin-left: 10%" >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Emp projects
+      </mat-panel-title>
+      <mat-panel-description>
+        <a>{{projects.length}} results</a>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-card >
+      <h1 style="text-align: center">Archival projects</h1>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+
+          <th scope="col">Project name</th>
+          <th scope="col">Start date</th>
+          <th scope="col">Project details</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let i of projects">
+          <td> {{ i.projectName }}</td>
+          <td>{{ i.startDate}}</td>
+          <td ><button mat-raised-button color="primary" (click)="navigatetoProject(i.projectName)">More info</button></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </mat-card>
+  </mat-expansion-panel>
+</mat-card>

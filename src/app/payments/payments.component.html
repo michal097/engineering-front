@@ -1,0 +1,36 @@
+<br><br><br>
+<mat-card style="margin-right: 10%; margin-left: 10%">
+  <h1>All invoices</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+
+      <th scope="col">Name</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Fv number</th>
+      <th scope="col">Bank account</th>
+      <th scope="col">Paid</th>
+      <th scope="col">More</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let i of invoices">
+      <td>{{ i.invName}}</td>
+      <td>{{ i.invSurname}}</td>
+      <td> {{ i.fvNumber }}</td>
+      <td>{{ i.bankAccNumber}}</td>
+      <td *ngIf="i.paid">Paid</td>
+      <td *ngIf="!i.paid">Not Paid</td>
+
+
+      <td ><button mat-raised-button color="primary" (click)="goToPayInvoice(i.invoiceId)">Go to pay</button></td>
+    </tr>
+    </tbody>
+  </table>
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions">
+<!--                 (page)="getAllClients($event)"-->
+  </mat-paginator>
+</mat-card>

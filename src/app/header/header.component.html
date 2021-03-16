@@ -30,6 +30,12 @@
       <li *ngIf="!isAuth&&isLoggedIn" class="nav-item">
         <a class="nav-link" routerLink="/allIssues">All issues</a>
       </li>
+      <li *ngIf="!isAuth&&isLoggedIn" class="nav-item">
+        <a class="nav-link" routerLink="/payment">Payments</a>
+      </li>
+      <li *ngIf="!isAuth&&isLoggedIn" class="nav-item">
+        <a class="nav-link" routerLink="/archival">Archival data</a>
+      </li>
     </ul>
     <a *ngIf="isLoggedIn"  class="nav-link btn btn-outline-info my-2 my-sm-0" style="float: right; margin-right: -11%" routerLink="/logout">Logout</a>
     <a *ngIf="!isLoggedIn" class="nav-link btn btn-outline-info my-2 my-sm-0" style="float: right; margin-right: 10px" routerLink="/login">Login</a>

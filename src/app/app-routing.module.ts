@@ -23,6 +23,10 @@ import {ProjectListComponent} from "./project-list/project-list.component";
 import {GetProjectComponent} from "./get-project/get-project.component";
 import {AllIssueComponent} from "./all-issue/all-issue.component";
 import {GetIssueComponent} from "./get-issue/get-issue.component";
+import {PaymentsComponent} from "./payments/payments.component";
+import {PayInvoiceComponent} from "./pay-invoice/pay-invoice.component";
+import {ExternalClientComponent} from "./external-client/external-client.component";
+import {ArchivalDataComponent} from "./archival-data/archival-data.component";
 
 
 const routes: Routes = [
@@ -49,6 +53,10 @@ const routes: Routes = [
   {path: 'project/:projectName', component: GetProjectComponent},
   {path: 'allIssues', component: AllIssueComponent},
   {path: 'issue/:id', component: GetIssueComponent},
+  {path: 'payment', component: PaymentsComponent},
+  {path: 'invoice/:id', component: PayInvoiceComponent},
+  {path: 'external/:id', component: ExternalClientComponent},
+  {path: 'archival', component: ArchivalDataComponent},
   //  for users
   // {path: 'getUserRoleData', component: EmployeeUserComponent, canActivate: [UserAuthService]},
 

@@ -8,6 +8,7 @@ export class Invoice {
   invName: string;
   invSurname: string;
   NIP: string;
+  invoiceURL: string;
 
   constructor() {
   }

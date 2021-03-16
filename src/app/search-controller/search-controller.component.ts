@@ -58,6 +58,14 @@ export class SearchControllerComponent implements OnInit {
     this.router.navigate(['emplyeeDetails', `${id}`]);
   }
 
+  routeToInvoice(id): void {
+    this.router.navigate(['invoice', `${id}`]);
+  }
+
+  navigateToExternalClient(id): void {
+    this.router.navigate(['external', `${id}`]);
+  }
+
   getInvoicesSearchResult(phrase): void {
     this.service.retrieveInvoicesSearch(phrase).subscribe(data => {
       this.invoice = data;
@@ -79,4 +87,5 @@ export class SearchControllerComponent implements OnInit {
       this.externalEmployee = data;
     });
   }
+
 }

@@ -37,10 +37,16 @@ import {GetProjectComponent} from './get-project/get-project.component';
 import {EndProjectComponent} from './get-project/end-project/end-project.component';
 import {ClientInvoiceComponent} from './client/client-invoice/client-invoice.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { AssignEmpComponent } from './get-project/assign-emp/assign-emp.component';
-import { AllIssueComponent } from './all-issue/all-issue.component';
+import {AssignEmpComponent} from './get-project/assign-emp/assign-emp.component';
+import {AllIssueComponent} from './all-issue/all-issue.component';
 import {GetIssueComponent, SafeHtmlPipe} from './get-issue/get-issue.component';
-import { HolidayProposalComponent } from './holiday-proposal/holiday-proposal.component';
+import {HolidayProposalComponent} from './holiday-proposal/holiday-proposal.component';
+import {PaymentsComponent} from './payments/payments.component';
+import {PayInvoiceComponent} from './pay-invoice/pay-invoice.component';
+import {InvoicePreviewComponent} from './pay-invoice/invoice-preview/invoice-preview.component';
+import {MakePaymentComponent} from './pay-invoice/make-payment/make-payment.component';
+import { ExternalClientComponent } from './external-client/external-client.component';
+import { ArchivalDataComponent } from './archival-data/archival-data.component';
 
 
 @NgModule({
@@ -71,7 +77,13 @@ import { HolidayProposalComponent } from './holiday-proposal/holiday-proposal.co
     GetIssueComponent,
     SafeHtmlPipe,
     SafeHtmlPipeline,
-    HolidayProposalComponent
+    HolidayProposalComponent,
+    PaymentsComponent,
+    PayInvoiceComponent,
+    InvoicePreviewComponent,
+    MakePaymentComponent,
+    ExternalClientComponent,
+    ArchivalDataComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +113,7 @@ import { HolidayProposalComponent } from './holiday-proposal/holiday-proposal.co
   }, {provide: MAT_DIALOG_DATA, useValue: {}},
     {provide: MatDialogRef, useValue: {}}],
   bootstrap: [AppComponent],
-  entryComponents: [ClientDialogComponent, DeleteClientDialogComponent, EndProjectComponent, ClientInvoiceComponent, AssignEmpComponent]
+  entryComponents: [ClientDialogComponent, MakePaymentComponent, DeleteClientDialogComponent, EndProjectComponent, ClientInvoiceComponent, AssignEmpComponent, InvoicePreviewComponent]
 })
 export class AppModule {
 }

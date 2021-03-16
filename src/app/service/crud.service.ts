@@ -120,8 +120,45 @@ export class CrudService {
   makeWorkInProgress(issue): Observable<any> {
     return this.http.post(`http://localhost:9090/makeWorkInProgress`, issue);
   }
+
   saveIssueSolution(issue): Observable<any> {
     return this.http.post(`http://localhost:9090/saveIssueSolution`, issue);
+  }
+
+  getAllivoices(): Observable<any> {
+    return this.http.get(`http://localhost:9090/getAllIvoices`);
+  }
+
+  getInvoiceById(id): Observable<any> {
+    return this.http.get(`http://localhost:9090/getSpecInvoiceById/${id}`);
+  }
+
+  makePayment(invoice): Observable<any> {
+    return this.http.post(`http://localhost:9090/makePayment`, invoice);
+  }
+
+  getAllExternalClients(): Observable<any> {
+    return this.http.get(`http://localhost:9090/allExternals`);
+  }
+
+  getExternalClient(id): Observable<any> {
+    return this.http.get(`http://localhost:9090/getExternal/${id}`);
+  }
+
+  getExternalClientInvoices(id): Observable<any> {
+    return this.http.get(`http://localhost:9090/getExternalClientInvoices/${id}`);
+  }
+
+  archivalInvoices(): Observable<any> {
+    return this.http.get(`http://localhost:9090/archivalInvoices`);
+  }
+
+  archivalIssue(): Observable<any> {
+    return this.http.get(`http://localhost:9090/archivalIssue`);
+  }
+
+  archivalProjects(): Observable<any> {
+    return this.http.get(`http://localhost:9090/archivalProjects`);
   }
 
 }
