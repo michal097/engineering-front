@@ -45,8 +45,8 @@ import {PaymentsComponent} from './payments/payments.component';
 import {PayInvoiceComponent} from './pay-invoice/pay-invoice.component';
 import {InvoicePreviewComponent} from './pay-invoice/invoice-preview/invoice-preview.component';
 import {MakePaymentComponent} from './pay-invoice/make-payment/make-payment.component';
-import { ExternalClientComponent } from './external-client/external-client.component';
-import { ArchivalDataComponent } from './archival-data/archival-data.component';
+import {ExternalClientComponent} from './external-client/external-client.component';
+import {ArchivalDataComponent} from './archival-data/archival-data.component';
 
 
 @NgModule({
@@ -113,7 +113,13 @@ import { ArchivalDataComponent } from './archival-data/archival-data.component';
   }, {provide: MAT_DIALOG_DATA, useValue: {}},
     {provide: MatDialogRef, useValue: {}}],
   bootstrap: [AppComponent],
-  entryComponents: [ClientDialogComponent, MakePaymentComponent, DeleteClientDialogComponent, EndProjectComponent, ClientInvoiceComponent, AssignEmpComponent, InvoicePreviewComponent]
+  entryComponents: [ClientDialogComponent,
+    MakePaymentComponent,
+    DeleteClientDialogComponent,
+    EndProjectComponent,
+    ClientInvoiceComponent,
+    AssignEmpComponent,
+    InvoicePreviewComponent]
 })
 export class AppModule {
 }

@@ -13,8 +13,10 @@
 
 <p>skills </p>
 <li *ngFor="let c of client.skills">{{c}}</li><br>
+  <div *ngIf="actUser!=='[ROLE_USER]'">
   <button mat-raised-button color="primary" (click)="openDialog()">Update</button>
   <button style="margin-left: 10px" mat-raised-button color="warn" (click)="openDelDialog()">  Delete</button>
+  </div>
 </mat-card>
 
 
@@ -43,7 +45,7 @@
     <tr *ngFor="let i of projects">
       <td> {{ i.projectName }}</td>
       <td>{{ i.startDate}}</td>
-      <td ><button mat-raised-button color="primary" (click)="retrieveProjectData(i.projectName)">More info</button></td>
+      <td *ngIf="actUser!=='[ROLE_USER]'"><button mat-raised-button color="primary" (click)="retrieveProjectData(i.projectName)">More info</button></td>
     </tr>
     </tbody>
   </table>

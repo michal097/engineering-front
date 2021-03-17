@@ -4,8 +4,9 @@
     <h2 style="text-align: center">Description</h2>
     <p [innerHTML]="getInnerHTMLData() | safeHtml"></p>
   </mat-card>
-  <button *ngIf="issue.status== 'ASSIGNED'" mat-raised-button color="primary" (click)="makeWorkInPro()">Work in progress</button>
-  <mat-card *ngIf="issue.status=='WORK_IN_PROGRESS'">
+
+  <button *ngIf="issue.status== 'ASSIGNED' && actualUser!='[ROLE_USER]'" mat-raised-button color="primary" (click)="makeWorkInPro()">Work in progress</button>
+  <mat-card *ngIf="issue.status=='WORK_IN_PROGRESS' && actualUser!='[ROLE_USER]'">
     <h3>Enter solution</h3>
     <angular-editor style="height: 300px" [placeholder]="'Enter solution here...'" [(ngModel)]="issue.solution" [config]="editorConfig">
 

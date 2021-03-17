@@ -21,7 +21,7 @@ export class ProjectListComponent implements OnInit {
   ngOnInit() {
     this.getProjesLength();
     this.service.displayProjectsList(0, this.pageSize).subscribe(data => {
-    this.projects = data;
+      this.projects = data;
     });
   }
 
@@ -33,7 +33,9 @@ export class ProjectListComponent implements OnInit {
   getProjects(e): any {
     this.service.displayProjectsList(e.pageIndex, e.pageSize).subscribe(data => this.projects = data);
   }
+
   retrieveProjectData(projectName): void {
-    this.router.navigate(['project', `${projectName}`]);
+    const project = projectName.replaceAll(' ', '-');
+    this.router.navigate(['project', `${project}`]);
   }
 }

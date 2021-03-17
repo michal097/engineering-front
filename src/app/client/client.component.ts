@@ -50,6 +50,7 @@ export class ClientComponent implements OnInit {
   pageSize = 10;
   invoiceURL: string;
   pageSizeOptions: number[] = [5, 10, 25, 100];
+  actUser: string;
 
   constructor(private service: CrudService,
               private router: ActivatedRoute,
@@ -97,6 +98,7 @@ export class ClientComponent implements OnInit {
     this.retrieveClientData(this.clientId);
     this.getProjects(this.clientId);
     this.retrieveClientInvoices();
+    this.getActualUser();
   }
 
   retrieveClientInvoices(): void {
@@ -117,6 +119,10 @@ export class ClientComponent implements OnInit {
 
   retrieveProjectData(projectName): void {
     this.route.navigate(['project', `${projectName}`]);
+  }
+
+  getActualUser(): void {
+    this.service.getActualUser().subscribe(data => this.actUser = data);
   }
 }
 

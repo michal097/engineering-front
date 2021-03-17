@@ -6,41 +6,44 @@
       <li *ngIf="isLoggedIn" class="nav-item active">
         <a class="nav-link" routerLink="/" >Home <span class="sr-only">(current)</span></a>
       </li>
-      <li *ngIf="!isAuth&&isLoggedIn" class="nav-item">
+      <li *ngIf="isAuthAdmin || isAuthModerator" class="nav-item">
         <a class="nav-link" routerLink="/addEmployee">Add employee</a>
       </li>
       <li *ngIf="isLoggedIn" class="nav-item">
         <a class="nav-link" routerLink="/addInvoice">Add invoice</a>
       </li>
-      <li *ngIf="!isAuth&&isLoggedIn" class="nav-item">
-        <a class="nav-link" routerLink="/dashboard">Dashboard</a>
-      </li>
-      <li *ngIf="!isAuth&&isLoggedIn" class="nav-item">
+
+      <li *ngIf="isAuthAdmin || isAuthModerator" class="nav-item">
         <a class="nav-link" routerLink="/project">Add project</a>
       </li>
-      <li *ngIf="isLoggedIn" class="nav-item">
+      <li *ngIf="isAuthUser" class="nav-item">
         <a class="nav-link" routerLink="/issue">Report issue</a>
       </li>
-      <li *ngIf="!isAuth&&isLoggedIn" class="nav-item">
+      <li *ngIf="isAuthModerator || isAuthAdmin" class="nav-item">
         <a class="nav-link" routerLink="/allClients">All clients</a>
       </li>
-      <li *ngIf="!isAuth&&isLoggedIn" class="nav-item">
+      <li *ngIf="isAuthModerator || isAuthAdmin" class="nav-item">
         <a class="nav-link" routerLink="/allProjects">Active projects</a>
       </li>
-      <li *ngIf="!isAuth&&isLoggedIn" class="nav-item">
-        <a class="nav-link" routerLink="/allIssues">All issues</a>
-      </li>
-      <li *ngIf="!isAuth&&isLoggedIn" class="nav-item">
-        <a class="nav-link" routerLink="/payment">Payments</a>
-      </li>
-      <li *ngIf="!isAuth&&isLoggedIn" class="nav-item">
+      <li *ngIf="isAuthModerator || isAuthUser" class="nav-item">
+        <a class="nav-link" routerLink="/allIssues">Issues</a>
+
+      <li *ngIf="isAuthModerator || isAuthAdmin" class="nav-item">
         <a class="nav-link" routerLink="/archival">Archival data</a>
+      </li>
+      <li *ngIf="isAuthUser " class="nav-item">
+        <a class="nav-link" routerLink="{{userId}}">My account</a>
+      </li>
+      <li *ngIf="isAuthAdmin" class="nav-item">
+        <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+      </li>
+      <li *ngIf="isAuthAdmin" class="nav-item">
+        <a class="nav-link" routerLink="/payment">Payments</a>
       </li>
     </ul>
     <a *ngIf="isLoggedIn"  class="nav-link btn btn-outline-info my-2 my-sm-0" style="float: right; margin-right: -11%" routerLink="/logout">Logout</a>
     <a *ngIf="!isLoggedIn" class="nav-link btn btn-outline-info my-2 my-sm-0" style="float: right; margin-right: 10px" routerLink="/login">Login</a>
-
-      <mat-search-bar *ngIf="isLoggedIn" (onEnter)="searchPhrase()" [formControl]="search" style="margin-right: 10%" ></mat-search-bar>
-
+      <mat-search-bar *ngIf="isAuthModerator || isAuthAdmin" (onEnter)="searchPhrase()" [formControl]="search" style="margin-right: 10%" ></mat-search-bar>
+    <div *ngIf="isAuthUser" style="margin-right: 12%" ></div>
   </div>
 </nav>

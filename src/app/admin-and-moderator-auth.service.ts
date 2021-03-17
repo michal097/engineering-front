@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminAndUserAuthService {
+export class AdminAndModeratorAuthService {
   constructor(private router: Router,
               private authService: AuthenticationService) {
   }
@@ -15,7 +15,7 @@ export class AdminAndUserAuthService {
     | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.authService.isAdminAuthenticated()) {
       return true;
-    } else if (this.authService.isUserAuthenticated()) {
+    } else if (this.authService.isModeratorAuthenticated()) {
 
       return true;
     } else {

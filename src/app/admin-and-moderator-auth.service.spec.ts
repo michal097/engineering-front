@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AdminAndUserAuthService } from './admin-and-user-auth.service';
+import { AdminAndUserAuthService } from './admin-and-moderator-auth.service';
 
 describe('AdminAndUserAuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

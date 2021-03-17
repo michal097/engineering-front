@@ -45,8 +45,12 @@ export class GetProjectComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectNameSnap = this.route.snapshot.params.projectName;
+    this.prepareProjectName(this.route.snapshot.params.projectName);
     this.getProjectData();
+  }
+
+  prepareProjectName(projectName: string): any {
+    return this.projectNameSnap = projectName.replace(' ', '-');
   }
 
   getProjectData(): void {

@@ -161,4 +161,10 @@ export class CrudService {
     return this.http.get(`http://localhost:9090/archivalProjects`);
   }
 
+  getActualUser(): Observable<any> {
+    return this.http.get(`http://localhost:9090/getActualUser`, {responseType: 'text'});
+  }
+  getUsername(): Observable<any> {
+    return this.http.get(`http://localhost:9090/getUsername`, {responseType: 'text'});
+  }
 }

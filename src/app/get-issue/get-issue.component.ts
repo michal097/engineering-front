@@ -72,9 +72,12 @@ export class GetIssueComponent implements OnInit {
   constructor(private service: CrudService, private router: ActivatedRoute) {
   }
 
+  actualUser: string;
+
   ngOnInit() {
     this.issueId = this.router.snapshot.params.id;
     this.retrieveIssueData();
+    this.service.getActualUser().subscribe(data => this.actualUser = data);
   }
 
   retrieveIssueData(): void {

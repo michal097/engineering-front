@@ -63,7 +63,7 @@
                    [(ngModel)]="emp.userType">
     <mat-radio-button value="ROLE_USER" > User</mat-radio-button>
     <mat-radio-button value="ROLE_MODERATOR"> Moderator  </mat-radio-button>
-    <mat-radio-button value="ROLE_ADMIN"> Admin  </mat-radio-button>
+    <mat-radio-button *ngIf="actUser==='[ROLE_ADMIN]'" value="ROLE_ADMIN"> Admin  </mat-radio-button>
 
 
   </mat-radio-group>

@@ -15,11 +15,14 @@ import {datepickerAnimation} from "ngx-bootstrap/datepicker/datepicker-animation
 
 export class HeaderComponent implements OnInit, OnDestroy {
   isUser: string;
-  isAuth: boolean;
+  isAuthUser: boolean;
+  isAuthAdmin: boolean;
+  isAuthModerator: boolean;
   isLoggedIn = false;
   search: FormControl = new FormControl();
   invoice: Client[];
   hidden = false;
+  userId: string;
 
   constructor(public loginService: AuthenticationService,
               private service: CrudService,
@@ -30,10 +33,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+
     window.addEventListener('scroll', this.scroll, true);
 
     this.checkAuth();
     setInterval(() => {
+      this.getUsername();
       this.checkAuth();
     }, 10);
   }
@@ -42,17 +47,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
     window.removeEventListener('scroll', this.scroll, true);
   }
 
+  getUsername(): void {
+    this.service.getUsername().subscribe(data => {
+      this.userId = 'emplyeeDetails/' + data;
+    });
+
+  }
+
   checkAuth() {
     this.service.auth().subscribe(data => {
       this.isUser = data;
     });
-    this.isAuth = this.isUser === '[ROLE_USER]';
-    this.isLoggedIn = this.isAuth || this.isUser === '[ROLE_ADMIN]';
+    this.isAuthUser = this.isUser === '[ROLE_USER]';
+    this.isAuthAdmin = this.isUser === '[ROLE_ADMIN]';
+    this.isAuthModerator = this.isUser === '[ROLE_MODERATOR]';
+    this.isLoggedIn = this.isUser === '[ROLE_USER]' || this.isUser === '[ROLE_ADMIN]' || this.isUser === '[ROLE_MODERATOR]';
   }
 
-  hideBadge() {
-    this.hidden = !this.hidden;
-  }
 
   scroll = (event): void => {
 

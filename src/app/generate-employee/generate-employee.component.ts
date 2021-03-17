@@ -54,6 +54,7 @@ export class GenerateEmployeeComponent implements OnInit {
   fruits: Skills[] = [];
   userGeneratedMessage = '';
   err = '';
+  actUser: string;
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -106,7 +107,12 @@ export class GenerateEmployeeComponent implements OnInit {
     this.route.navigate(['allClients']);
   }
 
+  checkUser(): void {
+    this.service.getActualUser().subscribe(data => this.actUser = data);
+  }
+
   ngOnInit() {
     this.emp = new Employee();
+    this.checkUser();
   }
 }
