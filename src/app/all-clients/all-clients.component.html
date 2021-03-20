@@ -43,7 +43,7 @@
       External clients
     </mat-panel-title>
     <mat-panel-description>
-      <a> {{externalClients.length}} results</a>
+      <a> {{extLen}} results</a>
     </mat-panel-description>
   </mat-expansion-panel-header>
   <table class="table table-striped">
@@ -65,10 +65,10 @@
     </tr>
     </tbody>
   </table>
-  <mat-paginator [length]="length"
+  <mat-paginator [length]="extLen"
                  [pageSize]="pageSize"
                  [pageSizeOptions]="pageSizeOptions"
-                 (page)="getAllClients($event)">
+                 (page)="getAllExternals($event)">
   </mat-paginator>
 </mat-expansion-panel>
 

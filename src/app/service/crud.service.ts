@@ -109,8 +109,8 @@ export class CrudService {
     return this.http.post(`http://localhost:9090/addEmpToSpecProj/${clientId}`, project);
   }
 
-  getAllIssues(): Observable<any> {
-    return this.http.get(`http://localhost:9090/allIssues`);
+  getAllIssues(page, size): Observable<any> {
+    return this.http.get(`http://localhost:9090/allIssues/${page}/${size}`);
   }
 
   getSpecIssue(issueID): Observable<any> {
@@ -125,8 +125,8 @@ export class CrudService {
     return this.http.post(`http://localhost:9090/saveIssueSolution`, issue);
   }
 
-  getAllivoices(): Observable<any> {
-    return this.http.get(`http://localhost:9090/getAllIvoices`);
+  getAllivoices(page, size): Observable<any> {
+    return this.http.get(`http://localhost:9090/getAllIvoices/${page}/${size}`);
   }
 
   getInvoiceById(id): Observable<any> {
@@ -137,8 +137,8 @@ export class CrudService {
     return this.http.post(`http://localhost:9090/makePayment`, invoice);
   }
 
-  getAllExternalClients(): Observable<any> {
-    return this.http.get(`http://localhost:9090/allExternals`);
+  getAllExternalClients(page, size): Observable<any> {
+    return this.http.get(`http://localhost:9090/allExternals/${page}/${size}`);
   }
 
   getExternalClient(id): Observable<any> {
@@ -149,22 +149,47 @@ export class CrudService {
     return this.http.get(`http://localhost:9090/getExternalClientInvoices/${id}`);
   }
 
-  archivalInvoices(): Observable<any> {
-    return this.http.get(`http://localhost:9090/archivalInvoices`);
+  archivalInvoices(page, size): Observable<any> {
+    return this.http.get(`http://localhost:9090/archivalInvoices/${page}/${size}`);
   }
 
-  archivalIssue(): Observable<any> {
-    return this.http.get(`http://localhost:9090/archivalIssue`);
+  archivalIssue(page, size): Observable<any> {
+    return this.http.get(`http://localhost:9090/archivalIssue/${page}/${size}`);
   }
 
-  archivalProjects(): Observable<any> {
-    return this.http.get(`http://localhost:9090/archivalProjects`);
+  archivalProjects(page, size): Observable<any> {
+    return this.http.get(`http://localhost:9090/archivalProjects/${page}/${size}`);
   }
+
+  getInvoiceSize(): Observable<any> {
+    return this.http.get(`http://localhost:9090/getInvoiceSize`, {responseType: 'text'});
+  }
+
+  getIssuesSize(): Observable<any> {
+    return this.http.get(`http://localhost:9090/getIssuesSize`, {responseType: 'text'});
+  }
+
+  getProjectSize(): Observable<any> {
+    return this.http.get(`http://localhost:9090/getProjectSize`, {responseType: 'text'});
+  }
+
 
   getActualUser(): Observable<any> {
     return this.http.get(`http://localhost:9090/getActualUser`, {responseType: 'text'});
   }
+
   getUsername(): Observable<any> {
     return this.http.get(`http://localhost:9090/getUsername`, {responseType: 'text'});
+  }
+
+  getAllExternalsLen(): Observable<any> {
+    return this.http.get(`http://localhost:9090/externalSize`, {responseType: 'text'});
+  }
+
+  getAllissuesLen(): Observable<any> {
+    return this.http.get(`http://localhost:9090/issuesLen`, {responseType: 'text'});
+  }
+  getInvoicesToPaySize(): Observable<any> {
+    return this.http.get(`http://localhost:9090/getInvoicesToPaySize`, {responseType: 'text'});
   }
 }

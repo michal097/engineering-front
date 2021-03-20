@@ -10,6 +10,7 @@ export class Issue {
   solution: string;
 
 }
+
 @Pipe({name: 'safeHtml'})
 export class SafeHtmlPipeline implements PipeTransform {
   constructor(private sanitized: DomSanitizer) {
@@ -28,10 +29,13 @@ export class SafeHtmlPipeline implements PipeTransform {
 export class IssueComponent implements OnInit {
 
   issueHasBeenAdded: string;
+
   constructor(private service: CrudService, private route: Router) {
   }
 
   issue: Issue;
+  isValid = true;
+  validateinfo: string;
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -76,14 +80,31 @@ export class IssueComponent implements OnInit {
     ]
   };
 
-//KOLKOV!!!!!!!!!!!!!!!!!!!!
   ngOnInit() {
     this.issue = new Issue();
   }
 
+  validateIssue(): void {
+    this.isValid = true;
+    const validArray = [];
+
+    if (this.issue.issueTitle === '' || this.issue.issueTitle === undefined) {
+      this.isValid = false;
+      validArray.push('title');
+    }
+    if (this.issue.issueDetails === '' || this.issue.issueDetails === undefined) {
+      this.isValid = false;
+      validArray.push('issue details');
+    }
+    this.validateinfo = 'Errors occured in following fields: ' + validArray.join(', ');
+  }
+
   addNewIssue(): void {
-    console.log(this.issue.issueDetails);
-    this.service.addIssue(this.issue).subscribe( () => this.issueHasBeenAdded = 'Issue has been added');
+
+    this.validateIssue();
+    if (this.isValid) {
+      this.service.addIssue(this.issue).subscribe(() => this.issueHasBeenAdded = 'Issue has been added');
+    }
   }
 
   goToMyIssues(): void {

@@ -19,7 +19,7 @@ export class AdminAndModeratorAuthService {
 
       return true;
     } else {
-      this.router.navigate(['login']).then(() => console.log('you are not an admin'));
+      this.router.navigate(['/']).then(() => console.log('you are not an admin'));
     }
   }
 }

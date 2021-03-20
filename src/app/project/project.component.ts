@@ -51,6 +51,8 @@ export class ProjectComponent implements OnInit {
   fruits: Skills[] = [];
   projectSuccess: string;
   err: string;
+  validateInfo: string;
+  isValid = true;
 
   constructor(private service: CrudService) {
   }
@@ -99,11 +101,48 @@ export class ProjectComponent implements OnInit {
     return [day, mnth, date.getFullYear()].join('-');
   }
 
+  validateProject(): void {
+    this.isValid = true;
+    const validateArray = [];
+
+    if (this.project.projectName === '' || this.project.projectName === undefined) {
+      validateArray.push('name');
+      this.isValid = false;
+
+    }
+    if (this.project.description === '' || this.project.description === undefined) {
+      validateArray.push('description');
+      this.isValid = false;
+
+    }
+    if (this.project.technologies === undefined || this.project.technologies.length === 0) {
+      validateArray.push('technologies');
+      this.isValid = false;
+
+    }
+
+    if (this.project.startDate === undefined || this.project.startDate.toString() === '') {
+      validateArray.push('start date');
+      this.isValid = false;
+
+    }
+    if (this.project.peopleNeeded < 1) {
+      validateArray.push('people on project');
+      this.isValid = false;
+
+    }
+    this.validateInfo = 'Error occurs in following fields: ' + validateArray.join(', ');
+  }
+
+
   saveProject(): any {
-    return this.service.enterNewProject(this.project).subscribe(
-      () => this.success(),
-      () => this.errors()
-    );
+    this.validateProject();
+    if (this.isValid) {
+      return this.service.enterNewProject(this.project).subscribe(
+        () => this.success(),
+        () => this.errors()
+      );
+    }
   }
 
   success() {

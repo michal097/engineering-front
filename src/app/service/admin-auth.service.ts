@@ -17,7 +17,7 @@ export class AdminAuthService implements CanActivate {
     if (this.authService.isAdminAuthenticated()) {
       return true;
     } else {
-      this.router.navigate(['login']).then(() => console.log('you are not an admin'));
+      this.router.navigate(['/']).then(() => console.log('you are not an admin'));
       return false;
     }
   }

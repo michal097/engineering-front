@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.userData = '';
     this.checkAuth();
-    this.getUserData();
+
   }
 
   checkAuth() {

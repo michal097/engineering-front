@@ -1,27 +1,27 @@
-<br><br>
 <div *ngIf="data.username">
-<h1 mat-dialog-title>Update client data</h1>
-<div mat-dialog-content >
-  <mat-form-field style="width: 400px">
-    <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="data.name">
-  </mat-form-field>
-  <mat-form-field style="width: 400px">
-    <mat-label>Surname</mat-label>
-    <input matInput [(ngModel)]="data.surname">
-  </mat-form-field>
-  <mat-form-field style="width: 400px">
-    <mat-label>Adress</mat-label>
-    <input matInput [(ngModel)]="data.adress">
-  </mat-form-field>
-  <mat-form-field style="width: 400px">
-    <mat-label>Adress</mat-label>
-    <input matInput [(ngModel)]="data.email">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Close</button>
-  <button mat-raised-button color="accent" [mat-dialog-close]="data" (click)="updateClient(data.clientId, data)" cdkFocusInitial>Ok</button>
-</div>
+  <p *ngIf="!isValid" class="alert alert-danger">{{validateMessage}}</p>
+  <h1 mat-dialog-title>Update client data</h1>
+  <div mat-dialog-content>
+    <mat-form-field style="width: 400px">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="data.name">
+    </mat-form-field>
+    <mat-form-field style="width: 400px">
+      <mat-label>Surname</mat-label>
+      <input matInput [(ngModel)]="data.surname">
+    </mat-form-field>
+    <mat-form-field style="width: 400px">
+      <mat-label>Adress</mat-label>
+      <input matInput [(ngModel)]="data.adress">
+    </mat-form-field>
+    <mat-form-field style="width: 400px">
+      <mat-label>Email</mat-label>
+      <input matInput [(ngModel)]="data.email">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Close</button>
+    <button mat-raised-button color="accent" (click)="updateClient(data.clientId, data)" cdkFocusInitial>Ok</button>
+  </div>
 </div>
 

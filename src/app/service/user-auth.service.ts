@@ -14,10 +14,10 @@ export class UserAuthService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean
     | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (!this.authService.isAdminAuthenticated()) {
+    if (this.authService.isUserAuthenticated()) {
       return true;
     } else {
-      this.router.navigate(['/login']).then(() => console.log('you are not an user'));
+      this.router.navigate(['/']).then(() => console.log('you are not an user'));
       return false;
     }
   }

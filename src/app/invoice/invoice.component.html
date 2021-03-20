@@ -21,6 +21,7 @@
     <mat-card  *ngIf="isImageLoaded">
       <p *ngIf="userHasBeenCreated" class="alert alert-success">Invoice has been saved!!</p>
       <p *ngIf="hasError" class="alert alert-danger">Invoice already exists in database</p>
+      <p *ngIf="!passedValidation" class="alert alert-danger">{{validateInfo}}</p>
 
       <mat-form-field class="generate_employee">
         <mat-label>Nr fv </mat-label>

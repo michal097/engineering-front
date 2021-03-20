@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree} from "@angular/router";
-import {AuthenticationService} from "./service/authentication.service";
-import {Observable} from "rxjs";
+import {ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import {AuthenticationService} from './service/authentication.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class ModeratorAndUserAuthService {
 
       return true;
     } else {
-      this.router.navigate(['login']).then(() => console.log('you are not an moderator nor user'));
+      this.router.navigate(['/']).then(() => console.log('you are not an moderator nor user'));
     }
   }
 }

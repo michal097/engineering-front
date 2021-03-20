@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
 
   success() {
     this.invalidPass = '';
-    this.userGeneratedMessage = 'User has been geenrated! -> try to log in!';
+    this.userGeneratedMessage = 'User has been geenrated!';
     this.err = '';
   }
 

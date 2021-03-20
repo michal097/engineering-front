@@ -3,13 +3,13 @@
 <mat-card style="margin-right: 10%; margin-left: 10%; margin-top: 5%">
   <h1 style="text-align: center;">Archival data</h1>
   <br><br>
-  <mat-expansion-panel  hideToggle style="margin-right: 10%; margin-left: 10%">
+  <mat-expansion-panel *ngIf="actualUser!=='[ROLE_ADMIN]'" hideToggle style="margin-right: 10%; margin-left: 10%">
     <mat-expansion-panel-header>
-      <mat-panel-title>
+      <mat-panel-title >
         Archival Issue
       </mat-panel-title>
       <mat-panel-description>
-        <a>{{issues.length}} results</a>
+        <a>{{issLen}} results</a>
       </mat-panel-description>
     </mat-expansion-panel-header>
   <h1 style="text-align: center">All finished issues</h1>
@@ -31,15 +31,20 @@
     </tr>
     </tbody>
   </table>
+    <mat-paginator [length]="issLen"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="archIssue($event)">
+    </mat-paginator>
   </mat-expansion-panel>
   <br>
-  <mat-expansion-panel *ngIf="invoices.length>0" hideToggle style="margin-right: 10%; margin-left: 10%">
+  <mat-expansion-panel *ngIf="issLen>0" hideToggle style="margin-right: 10%; margin-left: 10%">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Archival Invoices
       </mat-panel-title>
       <mat-panel-description>
-        <a>{{invoices.length}} results</a>
+        <a>{{invLen}} results</a>
       </mat-panel-description>
     </mat-expansion-panel-header>
     <h1 style="text-align: center">Archival invoices</h1>
@@ -61,15 +66,20 @@
       </tr>
       </tbody>
     </table>
+    <mat-paginator [length]="invLen"
+                   [pageSize]="pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="archInvoice($event)">
+    </mat-paginator>
   </mat-expansion-panel>
 <br>
   <mat-expansion-panel hideToggle style="margin-right: 10%; margin-left: 10%" >
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Emp projects
+        Archival projects
       </mat-panel-title>
       <mat-panel-description>
-        <a>{{projects.length}} results</a>
+        <a>{{proLen}} results</a>
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-card >
@@ -92,7 +102,11 @@
         </tr>
         </tbody>
       </table>
-
+      <mat-paginator [length]="proLen"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="pageSizeOptions"
+                     (page)="archProject($event)">
+      </mat-paginator>
     </mat-card>
   </mat-expansion-panel>
 </mat-card>

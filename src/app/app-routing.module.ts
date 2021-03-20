@@ -49,7 +49,7 @@ const routes: Routes = [
   {path: 'archival', component: ArchivalDataComponent, canActivate: [AdminAndModeratorAuthService]},
 
   // moderator and user
-  {path: 'issue', component: IssueComponent, canActivate: [ModeratorAndUserAuthService]},
+  {path: 'issue', component: IssueComponent, canActivate: [UserAuthService]},
   {path: 'allIssues', component: AllIssueComponent, canActivate: [ModeratorAndUserAuthService]},
   {path: 'issue/:id', component: GetIssueComponent, canActivate: [ModeratorAndUserAuthService]},
 

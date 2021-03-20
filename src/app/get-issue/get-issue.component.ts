@@ -24,6 +24,8 @@ export class GetIssueComponent implements OnInit {
 
   issue: Issue;
   issueId: string;
+  validateInfo: string;
+  isValid = true;
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -74,6 +76,15 @@ export class GetIssueComponent implements OnInit {
 
   actualUser: string;
 
+  checkValid(): void {
+    this.isValid = true;
+    console.log(this.issue.solution);
+    if (this.issue.solution === '' || this.issue.solution === undefined || this.issue.solution === null) {
+      this.validateInfo = 'Errors with solution field';
+      this.isValid = false;
+    }
+  }
+
   ngOnInit() {
     this.issueId = this.router.snapshot.params.id;
     this.retrieveIssueData();
@@ -86,7 +97,10 @@ export class GetIssueComponent implements OnInit {
   }
 
   saveIssueSolution(): void {
-    this.service.saveIssueSolution(this.issue).subscribe(data => this.issue = data);
+    this.checkValid();
+    if (this.isValid) {
+      this.service.saveIssueSolution(this.issue).subscribe(data => this.issue = data);
+    }
   }
 
   makeWorkInPro(): void {

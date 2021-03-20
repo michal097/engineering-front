@@ -19,5 +19,10 @@
     </tr>
     </tbody>
   </table>
+  <mat-paginator [length]="issuesLen"
+                 [pageSize]="pageSize"
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="listAllIssues($event)">
+  </mat-paginator>
 
 </mat-card>

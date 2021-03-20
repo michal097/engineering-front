@@ -1,107 +1,130 @@
 <br><br><br>
 <div class="content">
-<mat-card class="search_card" *ngIf="isAnySearchResultsInv || isAnySearchResultsCli || isAnySearchResultsExt">
-  <h1 style="text-align: center">Search results</h1>
-  <mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Invoices
-      </mat-panel-title>
-      <mat-panel-description>
-        <a>{{invoice.length}} results</a>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <table class="table table-striped">
-      <thead>
-      <tr>
+  <mat-card class="search_card" *ngIf="externalLen>0 || clientLen > 0 || invoiceLength > 0">
+    <h1 style="text-align: center">Search results</h1>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Invoices
+        </mat-panel-title>
+        <mat-panel-description>
+          <a>{{invoiceLength}} results</a>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <table class="table table-striped">
+        <thead>
+        <tr>
 
-        <th scope="col">Name</th>
-        <th scope="col">Surname</th>
-        <th scope="col">FV number</th>
-        <th scope="col">Costs</th>
-        <th scope="col">Details</th>
+          <th scope="col">Name</th>
+          <th scope="col">Surname</th>
+          <th scope="col">FV number</th>
+          <th scope="col">Costs</th>
+          <th scope="col">Details</th>
 
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let i of invoice">
-        <td> {{ i.invName }}</td>
-        <td>{{ i.invSurname}}</td>
-        <td>{{ i.fvNumber}}</td>
-        <td>{{ i.costs}}</td>
-        <td><button mat-raised-button color="primary" (click)="routeToInvoice(i.invoiceId)">Go to invoice</button> </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let i of invoice">
+          <td> {{ i.invName }}</td>
+          <td>{{ i.invSurname}}</td>
+          <td>{{ i.fvNumber}}</td>
+          <td>{{ i.costs}}</td>
+          <td>
+            <button mat-raised-button color="primary" (click)="routeToInvoice(i.invoiceId)">Go to invoice</button>
+          </td>
 
-      </tr>
-      </tbody>
-    </table>
-  </mat-expansion-panel>
-  <br>
-  <mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Employees
-      </mat-panel-title>
-      <mat-panel-description>
-        <a>{{employee.length}} results</a>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <table class="table table-striped">
-      <thead>
-      <tr>
+        </tr>
+        </tbody>
+      </table>
+      <mat-paginator [length]="invoiceLength"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="pageSizeOptions"
+                     (page)="getInvoicesSearchResult(currentPhrase, $event)">
+      </mat-paginator>
+    </mat-expansion-panel>
+    <br>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Employees
+        </mat-panel-title>
+        <mat-panel-description>
+          <a>{{clientLen}} results</a>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <table class="table table-striped">
+        <thead>
+        <tr>
 
-        <th scope="col">Username</th>
-        <th scope="col">Name</th>
-        <th scope="col">Surname</th>
-        <th scope="col">Email</th>
-        <th scope="col">NIP</th>
-        <th scope="col">Details</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let i of employee">
-        <td> {{ i.username}}</td>
-        <td> {{ i.name }}</td>
-        <td>{{ i.surname}}</td>
-        <td>{{ i.email}}</td>
-        <td>{{ i.nip}}</td>
-        <td ><button mat-raised-button color="primary" (click)="retrieveUserData(i.clientId)">Details</button></td>
-      </tr>
-      </tbody>
-    </table>
-  </mat-expansion-panel>
-  <br>
-  <mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        External clients
-      </mat-panel-title>
-      <mat-panel-description>
-        <a>{{externalEmployee.length}} results</a>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <table class="table table-striped">
-      <thead>
-      <tr>
+          <th scope="col">Username</th>
+          <th scope="col">Name</th>
+          <th scope="col">Surname</th>
+          <th scope="col">Email</th>
+          <th scope="col">NIP</th>
+          <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let i of employee">
+          <td> {{ i.username}}</td>
+          <td> {{ i.name }}</td>
+          <td>{{ i.surname}}</td>
+          <td>{{ i.email}}</td>
+          <td>{{ i.nip}}</td>
+          <td>
+            <button mat-raised-button color="primary" (click)="retrieveUserData(i.clientId)">Details</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <mat-paginator [length]="clientLen"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="pageSizeOptions"
+                     (page)="getClientsSearchResults(currentPhrase, $event)">
+      </mat-paginator>
+    </mat-expansion-panel>
+    <br>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          External clients
+        </mat-panel-title>
+        <mat-panel-description>
+          <a>{{externalLen}} results</a>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <table class="table table-striped">
+        <thead>
+        <tr>
 
-        <th scope="col">Name</th>
-        <th scope="col">Surname</th>
-        <th scope="col">NIP</th>
-        <th scope="col">Details</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let i of externalEmployee">
-        <td> {{ i.name }}</td>
-        <td>{{ i.surname}}</td>
-        <td>{{ i.nip}}</td>
-        <td><button mat-raised-button color="primary" (click)="navigateToExternalClient(i.externalClientId)">External client details </button> </td>
-      </tr>
-      </tbody>
-    </table>
-  </mat-expansion-panel>
+          <th scope="col">Name</th>
+          <th scope="col">Surname</th>
+          <th scope="col">NIP</th>
+          <th scope="col">Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let i of externalEmployee">
+          <td> {{ i.name }}</td>
+          <td>{{ i.surname}}</td>
+          <td>{{ i.nip}}</td>
+          <td>
+            <button mat-raised-button color="primary" (click)="navigateToExternalClient(i.externalClientId)">External
+              client details
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <mat-paginator [length]="externalLen"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="pageSizeOptions"
+                     (page)="getExternalClientsSearchResults(currentPhrase, $event)">
+      </mat-paginator>
+    </mat-expansion-panel>
 
-</mat-card>
-<mat-card class="search_card" *ngIf="!isAnySearchResultsInv && !isAnySearchResultsCli && !isAnySearchResultsExt">
-  <h1 style="text-align: center">There is no search results</h1>
-</mat-card>
+  </mat-card>
+  <mat-card class="search_card" *ngIf="externalLen===0 && clientLen === 0 && invoiceLength === 0">
+    <h1 style="text-align: center">There is no search results</h1>
+  </mat-card>
 </div>

@@ -1,24 +1,29 @@
 <br><br><br>
 <div *ngIf="!issueHasBeenAdded">
-<mat-card class="mat_card_issue" >
-  <mat-form-field class="mat_card_issue" style="text-align: center; font-size: 30px">
-    <mat-label>Type title of issue </mat-label>
-    <input style="text-align: left" type="text" [(ngModel)]="issue.issueTitle" name="client.name" matInput required="required"><br>
+  <p *ngIf="!isValid" style="text-align: center; font-size: 30px; margin: 2%"
+     class="alert alert-danger">{{validateinfo}}</p>
+  <mat-card class="mat_card_issue">
+    <mat-form-field class="mat_card_issue" style="text-align: center; font-size: 30px">
+      <mat-label>Type title of issue</mat-label>
+      <input style="text-align: left" type="text" [(ngModel)]="issue.issueTitle" name="client.name" matInput
+             required="required"><br>
 
-  </mat-form-field>
-</mat-card>
-<br>
-<mat-card class="mat_card_issue" style="height: 400px;">
-<angular-editor style="height: 300px" [placeholder]="'Enter text here...'" [(ngModel)]="issue.issueDetails" [config]="editorConfig">
+    </mat-form-field>
+  </mat-card>
+  <br>
+  <mat-card class="mat_card_issue" style="height: 400px;">
+    <angular-editor style="height: 300px" [placeholder]="'Enter text here...'" [(ngModel)]="issue.issueDetails"
+                    [config]="editorConfig">
 
-</angular-editor>
-</mat-card>
-<br>
-<button (click)="addNewIssue()" mat-raised-button color="warn" class="mat_card_issue mat_button_issue">Send issue</button>
+    </angular-editor>
+  </mat-card>
+  <br>
+  <button (click)="addNewIssue()" mat-raised-button color="warn" class="mat_card_issue mat_button_issue">Send issue
+  </button>
 </div>
 <mat-card *ngIf="issueHasBeenAdded" style="margin: 5%; text-align: center">
   <br>
-<h1 class="alert alert-success">  {{issueHasBeenAdded}} </h1>
+  <h1 class="alert alert-success">  {{issueHasBeenAdded}} </h1>
   <h2 [innerHTML]="issue.issueTitle | safeHtml" style="text-align: center"></h2>
   <br>
   <h3 [innerHTML]="issue.issueDetails | safeHtml"></h3>

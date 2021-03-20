@@ -28,9 +28,9 @@
     </tr>
     </tbody>
   </table>
-  <mat-paginator [length]="length"
+  <mat-paginator [length]="invsToPaySize"
                  [pageSize]="pageSize"
-                 [pageSizeOptions]="pageSizeOptions">
-<!--                 (page)="getAllClients($event)"-->
+                 [pageSizeOptions]="pageSizeOptions"
+                 (page)="getAllInvs($event)">
   </mat-paginator>
 </mat-card>

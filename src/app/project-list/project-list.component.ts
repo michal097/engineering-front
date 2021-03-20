@@ -28,6 +28,7 @@ export class ProjectListComponent implements OnInit {
   getProjesLength(): void {
     // tslint:disable-next-line:radix
     this.service.allProjsLen().subscribe(data => this.length = parseInt(data));
+    console.log(this.length);
   }
 
   getProjects(e): any {

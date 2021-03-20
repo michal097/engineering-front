@@ -1,7 +1,7 @@
-<br><br><br>
-<div style="margin-left: 20%; margin-right: 20%">
+<br><br><br><br><br><br>
+<div style="margin-left: 5%; margin-right: 5%">
 <p *ngIf="err" class="alert alert-danger">{{err}}</p>
-<br>
+  <p *ngIf="!isValid" class="alert alert-danger">{{validateInfo}}</p>
 <p *ngIf="projectSuccess" class="alert alert-success">{{projectSuccess}}</p>
 </div>
   <mat-horizontal-stepper [linear]="isLinear" #stepper>

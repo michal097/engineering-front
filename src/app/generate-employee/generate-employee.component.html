@@ -2,7 +2,8 @@
 <mat-card class="generate_employee_fields">
 
   <h1 style="text-align: center">Create new employee</h1>
-  <p *ngIf="err" class="alert alert-danger">{{err}}</p>
+  <p *ngIf="!isValid" class="alert alert-danger">{{err}}</p>
+  <p *ngIf="errNIP" class="alert alert-danger">{{errNIP}}</p>
   <br>
   <p *ngIf="userGeneratedMessage" class="alert alert-success">{{userGeneratedMessage}}</p>
 <mat-card class="generate_employee_fields">

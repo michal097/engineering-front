@@ -3,6 +3,7 @@ import {CrudService} from '../service/crud.service';
 import {Client} from '../client/client.component';
 import {PageEvent} from '@angular/material/paginator';
 import {Router} from '@angular/router';
+import {HttpClient} from "@angular/common/http";
 
 export class ExternalClient {
   externalClientId: string;
@@ -28,16 +29,23 @@ export class AllClientsComponent implements OnInit {
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   pageEvent: PageEvent;
+  extLen: number;
 
   ngOnInit() {
     this.allEmpL();
-    this.getAllExternals();
+    this.allExternals();
     this.service.retrieveAllClients(0, this.pageSize).subscribe(data => this.clients = data);
+    this.service.getAllExternalClients(0, this.pageSize).subscribe(data => this.externalClients = data);
   }
 
   allEmpL(): void {
     // tslint:disable-next-line:radix
     this.service.allEmpLen().subscribe(data => this.length = parseInt(data));
+  }
+
+  allExternals(): void {
+    // tslint:disable-next-line:radix
+    this.service.getAllExternalsLen().subscribe(data => this.extLen = parseInt(data));
   }
 
   retrieveUserData(id): void {
@@ -48,8 +56,8 @@ export class AllClientsComponent implements OnInit {
     this.service.retrieveAllClients(e.pageIndex, e.pageSize).subscribe(data => this.clients = data);
   }
 
-  getAllExternals(): void {
-    this.service.getAllExternalClients().subscribe(data => this.externalClients = data);
+  getAllExternals(e): void {
+    this.service.getAllExternalClients(e.pageIndex, e.pageSize).subscribe(data => this.externalClients = data);
   }
 
   navigateToExternalClient(id): void {

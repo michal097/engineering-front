@@ -31,6 +31,8 @@ export class InvoiceComponent implements OnInit {
   userHasBeenCreated: boolean;
   uploadButton: string;
   hasError: boolean;
+  validateInfo: string;
+  passedValidation = true;
 
   constructor(private fileUploadService: CrudService) {
   }
@@ -56,16 +58,51 @@ export class InvoiceComponent implements OnInit {
   }
 
   saveInv(): void {
-    this.fileUploadService.saveInvClient(this.client).subscribe(
-      () => {
-        this.userHasBeenCreated = true;
-        this.hasError = false;
+    this.validateInvoice();
+    if (this.passedValidation) {
+      this.fileUploadService.saveInvClient(this.client).subscribe(
+        () => {
+          this.userHasBeenCreated = true;
+          this.hasError = false;
 
-      },
-      () => {
-        this.hasError = true;
-        this.userHasBeenCreated = false;
-      });
+        },
+        () => {
+          this.hasError = true;
+          this.userHasBeenCreated = false;
+        });
+    }
+  }
+
+  validateInvoice(): void {
+    this.hasError = false;
+    this.validateInfo = 'Errors occured in following fields: ';
+    this.passedValidation = true;
+    const validateArr = [];
+    if (this.client.fvNumber === '' || this.client.fvNumber === undefined) {
+      this.passedValidation = false;
+      validateArr.push('Invoice number');
+    }
+    if (this.client.invName === '' || this.client.invName === undefined) {
+      this.passedValidation = false;
+      validateArr.push('Name');
+    }
+    if (this.client.invSurname === '' || this.client.invSurname === undefined) {
+      this.passedValidation = false;
+      validateArr.push('Surname');
+    }
+    if (this.client.nip === '' || this.client.nip === undefined || this.client.nip.length !== 10) {
+      this.passedValidation = false;
+      validateArr.push('NIP');
+    }
+    if (this.client.bankAccNumber === '' || this.client.bankAccNumber === undefined || this.client.bankAccNumber.split(' ').join('').length !== 26) {
+      this.passedValidation = false;
+      validateArr.push('Bank account');
+    }
+    if (this.client.costs === undefined || this.client.costs < 0) {
+      this.passedValidation = false;
+      validateArr.push('costs');
+    }
+    this.validateInfo = validateArr.join(', ');
   }
 
   onUpload() {

@@ -29,9 +29,11 @@ export class PaymentsComponent implements OnInit {
   length = 100;
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 25, 100];
+  invsToPaySize: number;
 
   ngOnInit() {
-    this.getAllInvs();
+    this.getAllInvsSize();
+    this.service.getAllivoices(0, this.pageSize).subscribe(data => this.invoices = data);
   }
 
   // getInfo(): void {
@@ -47,8 +49,12 @@ export class PaymentsComponent implements OnInit {
   //   this.getInfo();
   // }
 
-  getAllInvs(): void {
-    this.service.getAllivoices().subscribe(data => this.invoices = data);
+  getAllInvsSize(): void {
+    this.service.getInvoicesToPaySize().subscribe(data => this.invsToPaySize = data);
+  }
+
+  getAllInvs(e): void {
+    this.service.getAllivoices(e.pageIndex, e.pageSize).subscribe(data => this.invoices = data);
   }
 
   goToPayInvoice(id): void {
