@@ -1,8 +1,16 @@
+<div *ngIf="!startMakingPayout">
 <p>Are you sure you wanna pay <b>{{data.costs}}</b></p>
 <p>to bank account <b>{{data.bankAccNumber}}</b></p>
 <p>related to invoice number <b>{{data.fvNumber}}</b> ?</p>
 
-<button mat-button (click)="onNoClick()">Close</button>
-<button style="margin-left: 5%" mat-raised-button color="warn" (click)="makePayment()">Aprove</button>
-
-
+  <button mat-button (click)="onNoClick()">Close</button>
+  <button style="margin-left: 5%" mat-raised-button color="warn" (click)="makePayment()">Aprove</button>
+</div>
+<div *ngIf="startMakingPayout && !error">
+  <h3 style="text-align: center;">Making payout in progress</h3>
+  <mat-spinner style="margin-left: 38%; margin-right: 38%; margin-top: 5%" ></mat-spinner>
+</div>
+<div *ngIf="error">
+<h3 style="text-align: center" >Some error occured during payout money</h3><br><br><br>
+  <button mat-button (click)="onNoClick()">Close</button>
+</div>

@@ -89,16 +89,15 @@ export class ClientComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
     });
   }
 
   ngOnInit() {
-    this.clientId = this.router.snapshot.params.id;
-    this.retrieveClientData(this.clientId);
-    this.getProjects(this.clientId);
-    this.retrieveClientInvoices();
-    this.getActualUser();
+     this.clientId = this.router.snapshot.params.id;
+     this.retrieveClientData(this.clientId);
+     this.getProjects(this.clientId);
+     this.retrieveClientInvoices();
+     this.getActualUser();
   }
 
   retrieveClientInvoices(): void {

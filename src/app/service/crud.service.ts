@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {createAotUrlResolver} from "@angular/compiler";
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,7 @@ export class CrudService {
   }
 
   retrieveSpecyficUserData(id): Observable<any> {
-    return this.http.get(`http://localhost:9090/getEmployee/${id}`);
+    return this.http.get(`http://localhost:9090/getEmployeeById/${id}`);
   }
 
   enterNewProject(project): Observable<any> {
@@ -100,7 +101,9 @@ export class CrudService {
   findInvoiceByNumber(invoiceNumber): Observable<any> {
     return this.http.get(`http://localhost:9090/findInvoiceByNumber/${invoiceNumber}`, {responseType: 'text'});
   }
-
+  countAllExternalClients(): Observable<any> {
+    return this.http.get(`http://localhost:9090/countAllExternalClients/`, {responseType: 'text'});
+  }
   getEmployeesToProject(projectName): Observable<any> {
     return this.http.get(`http://localhost:9090/getEmployeesToProject/${projectName}`);
   }
@@ -133,8 +136,8 @@ export class CrudService {
     return this.http.get(`http://localhost:9090/getSpecInvoiceById/${id}`);
   }
 
-  makePayment(invoice): Observable<any> {
-    return this.http.post(`http://localhost:9090/makePayment`, invoice);
+  makePayment(amount, name, iban, invoiceId): Observable<any> {
+    return this.http.get(`http://localhost:9090/pay/${amount}/${name}/${iban}/${invoiceId}`);
   }
 
   getAllExternalClients(page, size): Observable<any> {

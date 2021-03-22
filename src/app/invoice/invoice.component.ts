@@ -9,6 +9,8 @@ export class Invoice {
   invSurname: string;
   NIP: string;
   invoiceURL: string;
+  costs: number;
+  invoiceId: string;
 
   constructor() {
   }
@@ -94,7 +96,7 @@ export class InvoiceComponent implements OnInit {
       this.passedValidation = false;
       validateArr.push('NIP');
     }
-    if (this.client.bankAccNumber === '' || this.client.bankAccNumber === undefined || this.client.bankAccNumber.split(' ').join('').length !== 26) {
+    if (this.client.bankAccNumber === '' || this.client.bankAccNumber === undefined || this.client.bankAccNumber.split(' ').join('').length !== 28) {
       this.passedValidation = false;
       validateArr.push('Bank account');
     }

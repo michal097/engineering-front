@@ -1,7 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {PayInvoiceComponent} from "../pay-invoice.component";
-import {CrudService} from "../../service/crud.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {PayInvoiceComponent} from '../pay-invoice.component';
+import {CrudService} from '../../service/crud.service';
+import {Invoice} from '../../invoice/invoice.component';
 
 @Component({
   selector: 'app-make-payment',
@@ -15,14 +16,38 @@ export class MakePaymentComponent implements OnInit {
               private service: CrudService) {
   }
 
-  ngOnInit() {
+  result: string;
+  invoice: Invoice;
+  name: string;
+  returns: any;
+  startMakingPayout = false;
+  error: boolean;
 
+  ngOnInit() {
+    this.invoice = this.data;
+    this.name = this.invoice.invName + '_' + this.invoice.invSurname;
+    console.log(this.name);
   }
 
   makePayment(): void {
-    this.service.makePayment(this.data).subscribe();
-    this.dialogRef.close();
+    this.startMakingPayout = true;
+    this.service.makePayment(this.invoice.costs,
+      this.name,
+      this.invoice.bankAccNumber,
+      this.invoice.invoiceId).subscribe(
+        d => {
+      this.returns = d;
+      if (d !== undefined) {
+        this.startMakingPayout = false;
+        this.dialogRef.close();
+      }
+    },
+      () => {
+          this.error = true;
+        }
+    );
   }
+
 
   onNoClick(): void {
     this.dialogRef.close();

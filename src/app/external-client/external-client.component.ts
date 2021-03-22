@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {CrudService} from "../service/crud.service";
-import {ExternalClient} from "../all-clients/all-clients.component";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Invoice} from "../invoice/invoice.component";
+import {CrudService} from '../service/crud.service';
+import {ExternalClient} from '../all-clients/all-clients.component';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Invoice} from '../invoice/invoice.component';
 
 @Component({
   selector: 'app-external-client',
@@ -14,6 +14,7 @@ export class ExternalClientComponent implements OnInit {
   externalClient: ExternalClient;
   externalId: string;
   invoices: Invoice[];
+  externalLen: number;
 
   constructor(private service: CrudService, private snap: ActivatedRoute, private router: Router) {
   }
@@ -30,7 +31,10 @@ export class ExternalClientComponent implements OnInit {
   }
 
   getExternalClientInvs(id): void {
-    this.service.getExternalClientInvoices(id).subscribe(data => this.invoices = data);
+    this.service.getExternalClientInvoices(id).subscribe(data => {
+      this.invoices = data;
+      this.externalLen = this.invoices.length;
+    });
   }
 
   navigateToInvoice(id): void {
