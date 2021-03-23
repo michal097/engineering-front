@@ -56,9 +56,13 @@ export class SearchControllerComponent implements OnInit {
         if (currentData === '' || currentData == null) {
           this.router.navigate(['']).then();
         } else {
+          setTimeout(() => {
+            console.log('some time to search');
+          }, 100);
           this.service.retrieveInvoicesSearch(currentData, 0, this.pageSize).subscribe(data => this.invoice = data);
           this.service.retrieveClientsSearch(currentData, 0, this.pageSize).subscribe(data => this.employee = data);
           this.service.retrieveExternalClientsSearch(currentData, 0, this.pageSize).subscribe(data => this.externalEmployee = data);
+          console.log('im in');
           this.invLens();
           this.clLen();
           this.extClLen();

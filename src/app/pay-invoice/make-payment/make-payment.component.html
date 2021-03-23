@@ -7,7 +7,7 @@
   <button style="margin-left: 5%" mat-raised-button color="warn" (click)="makePayment()">Aprove</button>
 </div>
 <div *ngIf="startMakingPayout && !error">
-  <h3 style="text-align: center;">Making payout in progress</h3>
+  <h3 style="text-align: center;">Placing payment...</h3>
   <mat-spinner style="margin-left: 38%; margin-right: 38%; margin-top: 5%" ></mat-spinner>
 </div>
 <div *ngIf="error">
