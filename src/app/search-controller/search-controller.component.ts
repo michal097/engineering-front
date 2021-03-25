@@ -49,23 +49,34 @@ export class SearchControllerComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.invoice = null;
     this.searchConnector.currentData.subscribe(currentData => {
         this.currentPhrase = currentData;
         console.log(currentData);
         if (currentData === '' || currentData == null) {
-          this.router.navigate(['']).then();
+          this.router.navigate(['']);
         } else {
-          setTimeout(() => {
-            console.log('some time to search');
-          }, 100);
-          this.service.retrieveInvoicesSearch(currentData, 0, this.pageSize).subscribe(data => this.invoice = data);
-          this.service.retrieveClientsSearch(currentData, 0, this.pageSize).subscribe(data => this.employee = data);
-          this.service.retrieveExternalClientsSearch(currentData, 0, this.pageSize).subscribe(data => this.externalEmployee = data);
-          console.log('im in');
-          this.invLens();
-          this.clLen();
-          this.extClLen();
+          this.isAnySearchResultsInv = false;
+          this.isAnySearchResultsCli = false;
+          this.isAnySearchResultsExt = false;
+          this.service.retrieveInvoicesSearch(currentData, 0, this.pageSize).subscribe(data => {
+            this.invoice = data;
+            this.invLens();
+            this.isAnySearchResultsInv = data.length > 0;
+          });
+          this.service.retrieveClientsSearch(currentData, 0, this.pageSize).subscribe(data => {
+            this.employee = data;
+            this.clLen();
+            this.isAnySearchResultsCli = data.length > 0;
+
+          });
+          this.service.retrieveExternalClientsSearch(currentData, 0, this.pageSize).subscribe(data => {
+            this.externalEmployee = data;
+            this.extClLen();
+            this.isAnySearchResultsExt = data.length > 0;
+          });
+
         }
       }
     );
@@ -101,22 +112,17 @@ export class SearchControllerComponent implements OnInit {
   getInvoicesSearchResult(phrase, e): void {
     this.service.retrieveInvoicesSearch(phrase, e.pageIndex, e.pageSize).subscribe(data => {
       this.invoice = data;
-      console.log('moj search' + data);
-      this.isAnySearchResultsInv = data.length > 0;
-      console.log(this.isAnySearchResultsInv);
     });
   }
 
   getClientsSearchResults(phrase, e): void {
     this.service.retrieveClientsSearch(phrase, e.pageIndex, e.pageSize).subscribe(data => {
-      this.isAnySearchResultsCli = data.length > 0;
       this.employee = data;
     });
   }
 
   getExternalClientsSearchResults(phrase, e): void {
     this.service.retrieveExternalClientsSearch(phrase, e.pageIndex, e.pageSize).subscribe(data => {
-      this.isAnySearchResultsExt = data.length > 0;
       this.externalEmployee = data;
     });
   }

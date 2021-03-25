@@ -18,9 +18,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userData = '';
+    this.getUserData();
     this.checkAuth();
-
+    console.log(this.userData);
   }
 
   checkAuth() {
@@ -31,9 +31,11 @@ export class HomeComponent implements OnInit {
       this.isAuthenticatedAsModerator = data === '[ROLE_MODERATOR]';
     });
   }
+
   getUserData(): void {
     this.service.getUserNameAndSurname().subscribe(data => {
       this.userData = data;
+      console.log(data);
     });
   }
 }
