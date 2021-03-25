@@ -19,7 +19,6 @@ export class MakePaymentComponent implements OnInit {
   result: string;
   invoice: Invoice;
   name: string;
-  returns: any;
   startMakingPayout = false;
   error: boolean;
 
@@ -36,10 +35,9 @@ export class MakePaymentComponent implements OnInit {
       this.invoice.bankAccNumber,
       this.invoice.invoiceId).subscribe(
         d => {
-      this.returns = d;
       if (d !== undefined) {
-        this.startMakingPayout = false;
         this.dialogRef.close();
+        this.startMakingPayout = false;
       }
     },
       () => {
