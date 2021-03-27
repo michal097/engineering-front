@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../service/authentication.service';
 import {CrudService} from '../service/crud.service';
+import {getIndexInputFile} from "@angular-devkit/build-angular/src/utils/webpack-browser-config";
 
 
 export class User {
@@ -76,7 +77,13 @@ export class LoginComponent implements OnInit {
   }
 
   errors() {
-    this.err = 'Wrong usernamem you cannot create account by yourself!';
+    if (this.user.username === undefined || this.user.username === ''
+      || this.user.password === '' || this.user.password === undefined ||
+      this.user.username === null || this.user.password === null) {
+      this.err = 'Username and password cannot be empty';
+    } else {
+      this.err = 'Wrong username you cannot create account by yourself!';
+    }
     this.userGeneratedMessage = '';
   }
 
@@ -91,8 +98,12 @@ export class LoginComponent implements OnInit {
       },
       () => {
         this.invalidLogin = true;
-        this.error = 'invalid username or password';
-
+        if (this.username === undefined || this.username === ''
+          || this.password === '' || this.password === undefined) {
+          this.error = 'Username and password cannot be empty';
+        } else {
+          this.error = 'invalid username or password';
+        }
       }
     );
   }
