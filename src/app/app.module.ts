@@ -48,7 +48,6 @@ import {MakePaymentComponent} from './pay-invoice/make-payment/make-payment.comp
 import {ExternalClientComponent} from './external-client/external-client.component';
 import {ArchivalDataComponent} from './archival-data/archival-data.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

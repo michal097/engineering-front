@@ -26,6 +26,7 @@
       <th scope="col">Surname</th>
       <th scope="col">Email</th>
       <th scope="col">Employee details</th>
+      <th scope="col">Remove from project</th>
     </tr>
     </thead>
     <tbody>
@@ -35,7 +36,9 @@
       <td>{{ i.email}}</td>
       <td>
         <button  mat-raised-button color="primary" (click)="retrieveUserData(i.clientId)">Details</button>
-
+      </td>
+      <td>
+        <button mat-raised-button color="warn" (click)="deleteEmpFromPro(i.clientId)">Delete from project</button>
       </td>
     </tr>
     </tbody>

@@ -195,4 +195,8 @@ export class CrudService {
   getInvoicesToPaySize(): Observable<any> {
     return this.http.get(`http://localhost:9090/getInvoicesToPaySize`, {responseType: 'text'});
   }
+
+  deleteEmployeeFromProject(project, client): Observable<any> {
+    return this.http.get(`http://localhost:9090/deleteEmployeeFromProject/${project}/${client}`);
+  }
 }

@@ -36,7 +36,6 @@ export class DeleteClientDialogComponent implements OnInit {
       this.service.deleteClientById(clientId).subscribe(r => {
       this.dialogRef.close();
       this.router.navigate(['allClients']);
-
       });
     } else {
       this.invalidPhrase = 'you entered invalid phrase';

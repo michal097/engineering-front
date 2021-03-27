@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Route, Router} from "@angular/router";
-import {CrudService} from "../service/crud.service";
-import {Project} from "../project/project.component";
-import {MatDialog} from "@angular/material/dialog";
-import {ClientDialogComponent} from "../client/client-dialog/client-dialog.component";
-import {EndProjectComponent} from "./end-project/end-project.component";
-import {AssignEmpComponent} from "./assign-emp/assign-emp.component";
+import {ActivatedRoute, Route, Router} from '@angular/router';
+import {CrudService} from '../service/crud.service';
+import {Project} from '../project/project.component';
+import {MatDialog} from '@angular/material/dialog';
+import {EndProjectComponent} from './end-project/end-project.component';
+import {AssignEmpComponent} from './assign-emp/assign-emp.component';
 
 @Component({
   selector: 'app-get-project',
@@ -44,6 +43,7 @@ export class GetProjectComponent implements OnInit {
     });
   }
 
+
   ngOnInit() {
     this.prepareProjectName(this.route.snapshot.params.projectName);
     this.getProjectData();
@@ -62,6 +62,10 @@ export class GetProjectComponent implements OnInit {
 
   retrieveUserData(id): void {
     this.router.navigate(['emplyeeDetails', `${id}`]);
+  }
+
+  deleteEmpFromPro(client): void {
+    this.service.deleteEmployeeFromProject(this.project.projectName, client).subscribe(() => this.getProjectData());
   }
 
 }
