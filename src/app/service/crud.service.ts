@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {createAotUrlResolver} from "@angular/compiler";
-
+import {createAotUrlResolver} from '@angular/compiler';
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -101,9 +101,11 @@ export class CrudService {
   findInvoiceByNumber(invoiceNumber): Observable<any> {
     return this.http.get(`http://localhost:9090/findInvoiceByNumber/${invoiceNumber}`, {responseType: 'text'});
   }
+
   countAllExternalClients(): Observable<any> {
     return this.http.get(`http://localhost:9090/countAllExternalClients/`, {responseType: 'text'});
   }
+
   getEmployeesToProject(projectName): Observable<any> {
     return this.http.get(`http://localhost:9090/getEmployeesToProject/${projectName}`);
   }
@@ -192,11 +194,16 @@ export class CrudService {
   getAllissuesLen(): Observable<any> {
     return this.http.get(`http://localhost:9090/issuesLen`, {responseType: 'text'});
   }
+
   getInvoicesToPaySize(): Observable<any> {
     return this.http.get(`http://localhost:9090/getInvoicesToPaySize`, {responseType: 'text'});
   }
 
   deleteEmployeeFromProject(project, client): Observable<any> {
     return this.http.get(`http://localhost:9090/deleteEmployeeFromProject/${project}/${client}`);
+  }
+
+  generateReport(from, to): Observable<Blob> {
+    return this.http.get(`http://localhost:9090/getReport/${from}/${to}`, {responseType: 'blob'});
   }
 }

@@ -1,0 +1,22 @@
+<h2 style="text-align: center">Generate report</h2>
+<br>
+<p class="alert alert-danger" *ngIf="invalidDate">{{invalidDate}}</p>
+<p class="alert alert-danger" *ngIf="invalidDateRange">{{invalidDateRange}}</p>
+<mat-form-field style="width: 100%" appearance="fill">
+  <mat-label>Date from</mat-label>
+  <input [(ngModel)]="dateFrom" matInput [matDatepicker]="picker">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field style="width: 100%" appearance="fill">
+  <mat-label>Date to</mat-label>
+  <input  [(ngModel)]="dateTo" matInput [matDatepicker]="picker1" >
+  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+  <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
+<br>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Close</button>
+  <button mat-raised-button color="accent"  cdkFocusInitial (click)="generateInvoiceReport()">Generate and download</button>
+</div>

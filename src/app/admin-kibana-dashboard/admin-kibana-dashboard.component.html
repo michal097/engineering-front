@@ -1,6 +1,9 @@
 <div class="loader" *ngIf="showLoader" id="spinner" ></div>
 
-<div style="margin: 5% 20%">
+<div style="margin: 3% 20%">
+  <br>
+  <button id="report" style="text-align: center; margin-left: 35%" mat-raised-button color="primary" (click)="openDialog()" >Generate invoices report in excel format</button>
+  <br>
 <iframe id="dashboard" style="margin-left: -330px"
         src="http://localhost:5601/app/dashboards#/view/3f6d77e0-8d9e-11eb-812f-a338a9cea47d?embed=true&_g=(filters:!(),query:(language:kuery,query:''),refreshInterval:(pause:!t,value:0),time:(from:now-30d,to:now))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),query:(language:kuery,query:''),timeRestore:!f,title:'my%20dashboard',viewMode:view)"
         height="950" width="1800">

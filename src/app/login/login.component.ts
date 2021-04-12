@@ -2,8 +2,6 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../service/authentication.service';
 import {CrudService} from '../service/crud.service';
-import {getIndexInputFile} from "@angular-devkit/build-angular/src/utils/webpack-browser-config";
-
 
 export class User {
   constructor(public username: string,

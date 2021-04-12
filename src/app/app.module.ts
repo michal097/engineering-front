@@ -47,6 +47,7 @@ import {InvoicePreviewComponent} from './pay-invoice/invoice-preview/invoice-pre
 import {MakePaymentComponent} from './pay-invoice/make-payment/make-payment.component';
 import {ExternalClientComponent} from './external-client/external-client.component';
 import {ArchivalDataComponent} from './archival-data/archival-data.component';
+import { ReportsComponent } from './admin-kibana-dashboard/reports/reports.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import {ArchivalDataComponent} from './archival-data/archival-data.component';
     InvoicePreviewComponent,
     MakePaymentComponent,
     ExternalClientComponent,
-    ArchivalDataComponent
+    ArchivalDataComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,
@@ -118,7 +120,8 @@ import {ArchivalDataComponent} from './archival-data/archival-data.component';
     EndProjectComponent,
     ClientInvoiceComponent,
     AssignEmpComponent,
-    InvoicePreviewComponent]
+    InvoicePreviewComponent,
+    ReportsComponent]
 })
 export class AppModule {
 }
