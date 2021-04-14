@@ -1,8 +1,8 @@
 <br><br><br><br><br><br>
 <div style="margin-left: 5%; margin-right: 5%">
 <p *ngIf="err" class="alert alert-danger">{{err}}</p>
-  <p *ngIf="!isValid" class="alert alert-danger">{{validateInfo}}</p>
-<p *ngIf="projectSuccess" class="alert alert-success">{{projectSuccess}}</p>
+  <p *ngIf="!isValid" class="alert alert-danger" style="text-align: center">{{validateInfo}}</p>
+<p *ngIf="projectSuccess" class="alert alert-success" style="text-align: center">{{projectSuccess}}</p>
 </div>
   <mat-horizontal-stepper [linear]="isLinear" #stepper>
   <mat-step>
@@ -64,7 +64,7 @@
     <p>start date: {{convert(project.startDate)}}</p>
     <p>people on project: {{project.peopleNeeded}}</p>
     <div *ngIf="!projectSuccess">
-    <button style="margin-right: 30%;margin-left: 30%; width: 40%; text-align: center" (click)="saveProject()" mat-raised-button color="primary">Save project</button>
+    <button style="margin-right: 30%;margin-left: 30%; width: 40%; font-size: 16px;font-weight: bold; text-align: center" (click)="saveProject()" mat-raised-button color="primary">Save project</button>
       <br>
 
       <button mat-button matStepperPrevious>Back</button>

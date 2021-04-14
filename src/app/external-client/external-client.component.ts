@@ -33,11 +33,13 @@ export class ExternalClientComponent implements OnInit {
   getExternalClientInvs(id): void {
     this.service.getExternalClientInvoices(id).subscribe(data => {
       this.invoices = data;
+      console.log(data);
       this.externalLen = this.invoices.length;
     });
   }
 
   navigateToInvoice(id): void {
+    console.log(this.invoices);
     this.router.navigate(['invoice', `${id}`]);
   }
 

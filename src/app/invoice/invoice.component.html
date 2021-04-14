@@ -1,9 +1,9 @@
 <br><br><br><br>
 
-<button id="selectUploadFile" matTooltip="select file to upload" mat-raised-button (click)="openInput()">{{uploadButton}}</button>
+<button id="selectUploadFile" style="color: white; font-size: 18px" matTooltip="select file to upload" mat-raised-button (click)="openInput()"><b>{{uploadButton}}</b></button>
 
 <input id="fileInput" hidden type="file" (change)="onChange($event)" name="file" accept=".png,.jpg,.gif">
-<button id="uploadFile" *ngIf="file" (click)="onUpload()"
+<button id="uploadFile" *ngIf="file && !isImageLoaded" (click)="onUpload()"
         mat-raised-button color="primary"
         matTooltip="click here to upload file ">
   Upload
@@ -19,9 +19,9 @@
 <div class="conte">
 <div id="card">
     <mat-card  *ngIf="isImageLoaded">
-      <p *ngIf="userHasBeenCreated" class="alert alert-success">Invoice has been saved!!</p>
-      <p *ngIf="hasError" class="alert alert-danger">Invoice already exists in database</p>
-      <p *ngIf="!passedValidation" class="alert alert-danger">{{validateInfo}}</p>
+      <p *ngIf="userHasBeenCreated" style="text-align: center" class="alert alert-success"><b>Invoice has been saved!</b></p>
+      <p *ngIf="hasError" style="text-align: center" class="alert alert-danger">Invoice already exists in database</p>
+      <p *ngIf="!passedValidation" style="text-align: center" class="alert alert-danger">Errors occured in the following fields: {{validateInfo}}</p>
 
       <mat-form-field class="generate_employee">
         <mat-label>Nr fv </mat-label>

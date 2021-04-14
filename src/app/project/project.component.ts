@@ -131,7 +131,7 @@ export class ProjectComponent implements OnInit {
       this.isValid = false;
 
     }
-    this.validateInfo = 'Error occurs in following fields: ' + validateArray.join(', ');
+    this.validateInfo = 'Errors occured in the following fields: ' + validateArray.join(', ');
   }
 
 

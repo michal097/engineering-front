@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {createAotUrlResolver} from '@angular/compiler';
-import { map } from 'rxjs/operators';
+import {map} from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -205,5 +206,9 @@ export class CrudService {
 
   generateReport(from, to): Observable<Blob> {
     return this.http.get(`http://localhost:9090/getReport/${from}/${to}`, {responseType: 'blob'});
+  }
+
+  chatMess(message): Observable<any> {
+    return this.http.get(`http://localhost:9090/chat/${message}`, {responseType: 'text'});
   }
 }

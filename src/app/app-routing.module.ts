@@ -28,6 +28,7 @@ import {ExternalClientComponent} from './external-client/external-client.compone
 import {ArchivalDataComponent} from './archival-data/archival-data.component';
 import {AdminAndModeratorAuthService} from './admin-and-moderator-auth.service';
 import {ModeratorAndUserAuthService} from './moderator-and-user-auth.service';
+import {MessageStreamComponent} from "./message-stream/message-stream.component";
 
 
 const routes: Routes = [
@@ -47,6 +48,7 @@ const routes: Routes = [
   {path: 'invoice/:id', component: PayInvoiceComponent, canActivate: [AdminAndModeratorAuthService]},
   {path: 'external/:id', component: ExternalClientComponent, canActivate: [AdminAndModeratorAuthService]},
   {path: 'archival', component: ArchivalDataComponent, canActivate: [AdminAndModeratorAuthService]},
+  { path: 'chat', component: MessageStreamComponent },
 
   // moderator and user
   {path: 'issue', component: IssueComponent, canActivate: [UserAuthService]},
@@ -58,7 +60,7 @@ const routes: Routes = [
   {path: 'payment', component: PaymentsComponent, canActivate: [AdminAuthService]},
 
   // available without auth
-  {path: '', component: HomeComponent},
+   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: '**', component: ErrorComponent}
 

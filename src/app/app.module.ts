@@ -47,7 +47,10 @@ import {InvoicePreviewComponent} from './pay-invoice/invoice-preview/invoice-pre
 import {MakePaymentComponent} from './pay-invoice/make-payment/make-payment.component';
 import {ExternalClientComponent} from './external-client/external-client.component';
 import {ArchivalDataComponent} from './archival-data/archival-data.component';
-import { ReportsComponent } from './admin-kibana-dashboard/reports/reports.component';
+import {ReportsComponent} from './admin-kibana-dashboard/reports/reports.component';
+import {MessageStreamComponent} from './message-stream/message-stream.component';
+import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
+import {myRxStompConfig} from './rx-stomp.config';
 
 @NgModule({
   declarations: [
@@ -84,7 +87,8 @@ import { ReportsComponent } from './admin-kibana-dashboard/reports/reports.compo
     MakePaymentComponent,
     ExternalClientComponent,
     ArchivalDataComponent,
-    ReportsComponent
+    ReportsComponent,
+    MessageStreamComponent
   ],
   imports: [
     BrowserModule,
@@ -112,7 +116,16 @@ import { ReportsComponent } from './admin-kibana-dashboard/reports/reports.compo
     useClass: BasicAuthHtppInterceptorService,
     multi: true
   }, {provide: MAT_DIALOG_DATA, useValue: {}},
-    {provide: MatDialogRef, useValue: {}}],
+    {provide: MatDialogRef, useValue: {}},
+    {
+      provide: InjectableRxStompConfig,
+      useValue: myRxStompConfig
+    },
+    {
+      provide: RxStompService,
+      useFactory: rxStompServiceFactory,
+      deps: [InjectableRxStompConfig]
+    }],
   bootstrap: [AppComponent],
   entryComponents: [ClientDialogComponent,
     MakePaymentComponent,
