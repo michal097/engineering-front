@@ -211,4 +211,7 @@ export class CrudService {
   chatMess(message): Observable<any> {
     return this.http.get(`http://localhost:9090/chat/${message}`, {responseType: 'text'});
   }
+  getMessages(): Observable<any> {
+    return this.http.get(`http://localhost:9090/getChat`);
+  }
 }

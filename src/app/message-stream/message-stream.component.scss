@@ -4,8 +4,9 @@
 .chat_card{
   margin: 5% 10%;
   height: 500px;
-  background-color: #999c9f;
   overflow-y: scroll;
+  background-color: #999c9f;
+  word-break: break-all;
 }
 
 .chat_input{
@@ -36,16 +37,25 @@
 .each_message{
   width: auto;
   display: inline-block;
+  padding: 10px;
+  border: solid 1px #9f9f9f;
+  border-radius: 10px;
+  margin-bottom: 1%;
 }
 
-.current_user {
+.current-user {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.other-user {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
-.other_user {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
 
+
+.current-user, .other-user {
+  margin-bottom: 20px;
+}

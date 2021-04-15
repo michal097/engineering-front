@@ -6,10 +6,6 @@ import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {CrudService} from '../service/crud.service';
 
-export class ChatMessage {
-  private username: string;
-  private message: string;
-}
 
 @Component({
   selector: 'app-message-stream',
@@ -18,12 +14,10 @@ export class ChatMessage {
 })
 
 export class MessageStreamComponent implements OnInit, OnDestroy {
-  messages: string[];
+  messages = [];
   message: string;
-  @Input()
-  username: string;
   checkUser: string;
-  isOwnMessage = false;
+  something: string[];
   private destroy$ = new Subject();
 
   constructor(private http: HttpClient,
@@ -32,17 +26,24 @@ export class MessageStreamComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
     this.http.get(`http://localhost:9090/chat/user`, {responseType: 'text'}).subscribe(u => {
       this.checkUser = u;
-      console.log(u);
     });
 
-    this.messages = [];
-    this.rxStompService.watch('/topic/messages')
-      .pipe(
-        takeUntil(this.destroy$)
-      ).subscribe((message: Message) => {
-      this.messages.push(message.body);
+    this.service.getMessages().subscribe(s => {
+
+      //    const element = document.getElementById('chat');
+      //    document.getElementById('scroll').appendChild(element);
+      //     document.getElementById('scroll').scrollTop = element.offsetHeight + element.offsetTop;
+
+      this.messages = s;
+      this.rxStompService.watch('/topic/messages')
+        .pipe(
+          takeUntil(this.destroy$)
+        ).subscribe((message: Message) => {
+        this.messages.push(message.body);
+      });
     });
   }
 
@@ -52,12 +53,11 @@ export class MessageStreamComponent implements OnInit, OnDestroy {
   }
 
   sendMessage(message): void {
-    this.isOwnMessage = false;
-    console.log(message);
-    this.service.chatMess(message).subscribe(u => {
-      this.username = u.substring(0, u.indexOf(':'));
-      console.log('username', u.substring(0, 2));
-    });
+    this.service.chatMess(message).subscribe();
     this.message = '';
+  }
+
+  isCurrentUser(message: string): boolean {
+    return this.checkUser === message.substring(0, message.indexOf(':'));
   }
 }

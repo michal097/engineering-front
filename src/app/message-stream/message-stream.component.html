@@ -1,20 +1,20 @@
-<br><br><br>
-
-
+<br><br>
 <div>
-<mat-card class="chat_card">
+<mat-card class="chat_card" id="chat">
   <p *ngIf="messages.length == 0" class="initial_message">Write something...</p>
 
   <p *ngFor="let msg of messages"
 
-     [ngClass]="{'current_user': true}"
-  ><mat-card class="each_message" id="mess" >{{ msg }}</mat-card></p>
+     [ngClass]="{'current-user': isCurrentUser(msg), 'other-user': !isCurrentUser(msg)}"
+  ><mat-card class="each_message" >{{ msg }}</mat-card></p>
 </mat-card>
   <mat-card class="chat_input">
     <mat-form-field >
       <input [(ngModel)]="message" matInput placeholder="Write message" >
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="sendMessage(message)" class="send">Send</button>
+<!--      [disabled]="message === '' || message === undefined" -->
+
 
   </mat-card>
 </div>
