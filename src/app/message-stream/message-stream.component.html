@@ -1,4 +1,4 @@
-<br><br>
+<br><br><br><br>
 <div>
 <mat-card class="chat_card" id="chat">
   <p *ngIf="messages.length == 0" class="initial_message">Write something...</p>
@@ -12,9 +12,8 @@
     <mat-form-field >
       <input [(ngModel)]="message" matInput placeholder="Write message" >
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="sendMessage(message)" class="send">Send</button>
-<!--      [disabled]="message === '' || message === undefined" -->
-
+    <button mat-raised-button color="primary" (click)="sendMessage(message)" class="send"
+      [disabled]="message === '' || message === undefined">Send</button>
 
   </mat-card>
 </div>

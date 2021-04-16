@@ -26,16 +26,15 @@ export class MessageStreamComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    const elem = document.getElementById('chat');
+    setTimeout(() => {
+      elem.scrollTop = elem.scrollHeight;
+    }, 50);
     this.http.get(`http://localhost:9090/chat/user`, {responseType: 'text'}).subscribe(u => {
       this.checkUser = u;
     });
 
     this.service.getMessages().subscribe(s => {
-
-      //    const element = document.getElementById('chat');
-      //    document.getElementById('scroll').appendChild(element);
-      //     document.getElementById('scroll').scrollTop = element.offsetHeight + element.offsetTop;
 
       this.messages = s;
       this.rxStompService.watch('/topic/messages')
@@ -43,8 +42,14 @@ export class MessageStreamComponent implements OnInit, OnDestroy {
           takeUntil(this.destroy$)
         ).subscribe((message: Message) => {
         this.messages.push(message.body);
+        setTimeout(() => {
+          elem.scrollTop = elem.scrollHeight;
+        }, 10);
+
       });
     });
+
+
   }
 
   ngOnDestroy(): void {
@@ -55,6 +60,8 @@ export class MessageStreamComponent implements OnInit, OnDestroy {
   sendMessage(message): void {
     this.service.chatMess(message).subscribe();
     this.message = '';
+    const elem = document.getElementById('chat');
+    elem.scrollTop = elem.scrollHeight;
   }
 
   isCurrentUser(message: string): boolean {

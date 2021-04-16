@@ -20,7 +20,7 @@
   <br><br><br>
   <div >
   <button mat-raised-button color="accent" (click)="openInvoiceDialog()">Invoice preview</button>
-  <button *ngIf="!inv.paid" style="margin-left: 5%" mat-raised-button color="primary" (click)="openPaymentDialog()">Make payment</button>
+  <button *ngIf="!inv.paid && isAdmin" style="margin-left: 5%" mat-raised-button color="primary" (click)="openPaymentDialog()">Make payment</button>
   </div>
  </mat-card>
 

@@ -6,6 +6,7 @@ import {ClientInvoiceComponent} from "../client/client-invoice/client-invoice.co
 import {MatDialog} from "@angular/material/dialog";
 import {InvoicePreviewComponent} from "./invoice-preview/invoice-preview.component";
 import {MakePaymentComponent} from "./make-payment/make-payment.component";
+import {AuthenticationService} from "../service/authentication.service";
 
 @Component({
   selector: 'app-pay-invoice',
@@ -14,16 +15,20 @@ import {MakePaymentComponent} from "./make-payment/make-payment.component";
 })
 export class PayInvoiceComponent implements OnInit {
 
-  constructor(private service: CrudService, private snap: ActivatedRoute, private dialog: MatDialog) {
+  constructor(private service: CrudService,
+              private snap: ActivatedRoute,
+              private dialog: MatDialog,
+              private authService: AuthenticationService) {
   }
 
   fvId: string;
   inv: Invoice;
+  isAdmin: boolean;
 
   ngOnInit() {
     this.fvId = this.snap.snapshot.params.id;
     this.retrieveInvoice(this.fvId);
-
+    this.isAdmin = this.authService.isAdminAuthenticated();
   }
 
   retrieveInvoice(id): void {
