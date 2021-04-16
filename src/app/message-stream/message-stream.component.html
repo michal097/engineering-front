@@ -6,14 +6,15 @@
   <p *ngFor="let msg of messages"
 
      [ngClass]="{'current-user': isCurrentUser(msg), 'other-user': !isCurrentUser(msg)}"
-  ><mat-card class="each_message" >{{ msg }}</mat-card></p>
+  ><mat-card [ngClass]="{'current-user-mess': isCurrentUser(msg), 'other-user-mess': !isCurrentUser(msg)}"
+  >{{ msg }}</mat-card></p>
 </mat-card>
   <mat-card class="chat_input">
     <mat-form-field >
-      <input [(ngModel)]="message" matInput placeholder="Write message" >
+      <input [(ngModel)]="message" matInput placeholder="Write message" autofocus>
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="sendMessage(message)" class="send"
-      [disabled]="message === '' || message === undefined">Send</button>
+      [disabled]="message === '' || message === undefined" autofocus>Send</button>
 
   </mat-card>
 </div>

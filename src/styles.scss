@@ -28,7 +28,7 @@ body {
   100% { transform: rotate(360deg); }
 }
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -38,7 +38,7 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: #4f4e4e;
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

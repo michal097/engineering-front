@@ -17,7 +17,6 @@ export class MessageStreamComponent implements OnInit, OnDestroy {
   messages = [];
   message: string;
   checkUser: string;
-  something: string[];
   private destroy$ = new Subject();
 
   constructor(private http: HttpClient,

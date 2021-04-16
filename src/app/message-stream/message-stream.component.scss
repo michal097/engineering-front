@@ -35,19 +35,29 @@
   box-sizing: border-box;
 }
 
-.each_message{
+.current-user-mess{
   width: auto;
   display: inline-block;
   padding: 10px;
   border: solid 1px #9f9f9f;
   border-radius: 10px;
   margin-bottom: 1%;
+  background-color: #b1f175;
 }
-
+.other-user-mess{
+  width: auto;
+  display: inline-block;
+  padding: 10px;
+  border: solid 1px #9f9f9f;
+  border-radius: 10px;
+  margin-bottom: 1%;
+  background-color: #5cfdfd;
+}
 .current-user {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+
 }
 
 .other-user {
