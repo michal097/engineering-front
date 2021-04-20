@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {RxStompService} from '@stomp/ng2-stompjs';
 import {Message} from '@stomp/stompjs';
 import {Subject} from 'rxjs';
@@ -25,6 +25,7 @@ export class MessageStreamComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
     const elem = document.getElementById('chat');
     setTimeout(() => {
       elem.scrollTop = elem.scrollHeight;
@@ -40,15 +41,15 @@ export class MessageStreamComponent implements OnInit, OnDestroy {
         .pipe(
           takeUntil(this.destroy$)
         ).subscribe((message: Message) => {
-        this.messages.push(message.body);
+
+        const jsonObj = JSON.parse(message.body);
+
+        this.messages.push(jsonObj);
         setTimeout(() => {
           elem.scrollTop = elem.scrollHeight;
         }, 10);
-
       });
     });
-
-
   }
 
   ngOnDestroy(): void {
@@ -63,7 +64,7 @@ export class MessageStreamComponent implements OnInit, OnDestroy {
     elem.scrollTop = elem.scrollHeight;
   }
 
-  isCurrentUser(message: string): boolean {
-    return this.checkUser === message.substring(0, message.indexOf(':'));
+  isCurrentUser(username: string): boolean {
+    return this.checkUser === username;
   }
 }
