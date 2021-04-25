@@ -211,7 +211,33 @@ export class CrudService {
   chatMess(message): Observable<any> {
     return this.http.get(`http://localhost:9090/chat/${message}`, {responseType: 'text'});
   }
+  chatMessToPersonal(username, message): Observable<any> {
+    return this.http.get(`http://localhost:9090/chat/${username}/${message}`);
+  }
+
   getMessages(): Observable<any> {
     return this.http.get(`http://localhost:9090/getChat`);
+  }
+
+  getSpecChat(targetUser): Observable<any> {
+    return this.http.get(`http://localhost:9090/getSpecChat/${targetUser}`);
+  }
+
+  getMyChats(actialUser): Observable<any> {
+    return this.http.get(`http://localhost:9090/getMyChats/${actialUser}`);
+  }
+  getAvailableChats(): Observable<any> {
+    return this.http.get(`http://localhost:9090/getAvailableChats/`);
+  }
+  startChatting(targetuser): Observable<any> {
+    return this.http.get(`http://localhost:9090/startChatting/${targetuser}`, {responseType: 'text'});
+  }
+  getChatCounter(chatID, sendFrom): Observable<any> {
+    return this.http.get(`http://localhost:9090/getChatCounter/${chatID}/${sendFrom}`);
+
+  }
+  markAsRead(chatID, sendFrom): Observable<any> {
+    return this.http.get(`http://localhost:9090/markAsRead/${chatID}/${sendFrom}`);
+
   }
 }

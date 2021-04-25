@@ -51,6 +51,7 @@ import {ReportsComponent} from './admin-kibana-dashboard/reports/reports.compone
 import {MessageStreamComponent} from './message-stream/message-stream.component';
 import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
 import {myRxStompConfig} from './rx-stomp.config';
+import {PersonalChatComponent} from './message-stream/personal-chat/personal-chat.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import {myRxStompConfig} from './rx-stomp.config';
     ExternalClientComponent,
     ArchivalDataComponent,
     ReportsComponent,
-    MessageStreamComponent
+    MessageStreamComponent,
+    PersonalChatComponent
   ],
   imports: [
     BrowserModule,
@@ -134,7 +136,8 @@ import {myRxStompConfig} from './rx-stomp.config';
     ClientInvoiceComponent,
     AssignEmpComponent,
     InvoicePreviewComponent,
-    ReportsComponent]
+    ReportsComponent,
+    PersonalChatComponent]
 })
 export class AppModule {
 }

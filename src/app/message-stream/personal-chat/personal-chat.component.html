@@ -1,0 +1,18 @@
+<mat-card class="chat_header"><h1>Chat with {{data[1]}}</h1></mat-card>
+<mat-card class="chat_card" id="personalChat">
+
+  <p *ngIf="messages.length == 0" class="initial_message">Write something...</p>
+  <p *ngFor="let msg of messages"
+
+     [ngClass]="{'current-user': isCurrentUser(msg.username), 'other-user': !isCurrentUser(msg.username)}"
+  ><mat-card [ngClass]="{'current-user-mess': isCurrentUser(msg.username), 'other-user-mess': !isCurrentUser(msg.username)}"
+  ><b>{{msg.username.toUpperCase()}} </b>: {{ msg.message }}</mat-card></p>
+</mat-card>
+<mat-card class="chat_input">
+  <mat-form-field >
+    <input (keydown.enter)="sendMessage(message)" [(ngModel)]="message" matInput placeholder="Write your message" autofocus>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="sendMessage(message)" class="send"
+          [disabled]="message === '' || message === undefined" autofocus>Send</button>
+
+</mat-card>

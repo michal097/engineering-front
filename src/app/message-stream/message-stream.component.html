@@ -1,21 +1,53 @@
-<br><br><br><br>
-<div>
-  <mat-card class="chat_header"><h1>Internal group chat</h1></mat-card>
-  <mat-card class="chat_card" id="chat">
-    <p *ngIf="messages.length == 0" class="initial_message">Write something...</p>
+<br><br>
 
-    <p *ngFor="let msg of messages"
+<mat-drawer-container class="chat-container">
+  <mat-drawer #drawer style="width: 15%">
+    <br><br>
+    <h3>Your active chats</h3>
+    <br>
+    <p *ngFor="let chat of chatMap | keyvalue ">
+      <button (click)="openDialog(chat.key, chat.value[0]);markAsReadedImpl(chat.key,chat.value[0])"
+              mat-raised-button color="accent" [matBadgeHidden]="chat.value[1]==0" matBadge="{{ chat.value[1]}}">Write
+        to {{chat.value[0]}} </button>
+    </p>
+    <br>
+    <h3>Start chatting with...</h3><br>
+    <p *ngFor="let available of availableChats">
+      <button mat-raised-button color="primary"
+              (click)="openDialog(startChat(available), available)"> {{available}}</button>
+    </p>
+  </mat-drawer>
+  <mat-drawer-content>
 
-       [ngClass]="{'current-user': isCurrentUser(msg.username), 'other-user': !isCurrentUser(msg.username)}"
-    ><mat-card [ngClass]="{'current-user-mess': isCurrentUser(msg.username), 'other-user-mess': !isCurrentUser(msg.username)}"
-    >{{msg.username.toUpperCase()}} : {{ msg.message }}</mat-card></p>
-  </mat-card>
-  <mat-card class="chat_input">
-    <mat-form-field >
-      <input (keydown.enter)="sendMessage(message)" [(ngModel)]="message" matInput placeholder="Write your message" autofocus>
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="sendMessage(message)" class="send"
-            [disabled]="message === '' || message === undefined" autofocus>Send</button>
+    <div>
+      <br>
+      <mat-card class="chat_header"><h1>Internal group chat</h1></mat-card>
+      <button *ngIf="checkUser!=='admin'" mat-raised-button color="primary" class="open_chats"
+              (click)="drawer.toggle();">Open my chats
+      </button>
+      <mat-card class="chat_card" id="chat">
+        <p *ngIf="messages.length == 0" class="initial_message">Write something...</p>
 
-  </mat-card>
-</div>
+        <p *ngFor="let msg of messages"
+
+           [ngClass]="{'current-user': isCurrentUser(msg.username), 'other-user': !isCurrentUser(msg.username)}"
+        >
+          <mat-card
+            [ngClass]="{'current-user-mess': isCurrentUser(msg.username), 'other-user-mess': !isCurrentUser(msg.username)}"
+          ><b>{{msg.username.toUpperCase()}}</b>: {{ msg.message }}</mat-card>
+        </p>
+      </mat-card>
+      <mat-card class="chat_input">
+        <mat-form-field>
+          <input (keydown.enter)="sendMessage(message)" [(ngModel)]="message" matInput placeholder="Write your message"
+                 autofocus>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="sendMessage(message)" class="send"
+                [disabled]="message === '' || message === undefined" autofocus>Send
+        </button>
+
+      </mat-card>
+    </div>
+
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -33,4 +33,5 @@ export class SearchSService {
   externalLen(): Observable<any> {
     return this.http.get(`http://localhost:9090/externalLen`, {responseType: 'text'});
   }
+
 }
